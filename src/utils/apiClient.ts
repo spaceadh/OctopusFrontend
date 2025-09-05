@@ -1,14 +1,24 @@
 import axios from 'axios'
 
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
+const API_URL = import.meta.env['VITE_API_URL'] || 'http://localhost:5000/api';
 
-// You can add interceptors for handling tokens, errors, etc.
-// apiClient.interceptors.request.use(...)
-// apiClient.interceptors.response.use(...)
+export const ProtectedAPIUtil = (accessToken:string) => {  
+    return axios.create({
+      baseURL: API_URL,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `${accessToken || ''}`,
+      },
+      withCredentials: true, // VERY IMPORTANT to send the cookie
+    });
+};
 
-export default apiClient
+export const PublicAPIUtil = () => {
+  return axios.create({
+    baseURL: API_URL,
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};

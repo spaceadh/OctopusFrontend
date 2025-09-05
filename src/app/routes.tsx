@@ -1,9 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { DashboardLayout } from './layout/DashboardLayout'
 
-import { createBrowserRouter } from 'react-router-dom'
-import { DashboardLayout } from './layout/DashboardLayout'
-
 import propertiesRoutes from '@/modules/properties/routes'
 import saccoRoutes from '@/modules/sacco/routes'
 import chamaRoutes from '@/modules/chama/routes'
