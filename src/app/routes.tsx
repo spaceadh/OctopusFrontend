@@ -9,6 +9,7 @@ import propertiesRoutes from '@/modules/properties/routes'
 import saccoRoutes from '@/modules/sacco/routes'
 import chamaRoutes from '@/modules/chama/routes'
 import lendingRoutes from '@/modules/lending/routes'
+import ForgotPasswordPage from '@/modules/auth/pages/ForgotPassword'
 
 export const router = createBrowserRouter([
   // Public routes
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
   {
     path: '/register',
     element: <RegisterPage />,
+  },
+  {
+    path: '/forgot-password', 
+    element: <ForgotPasswordPage />,
   },
   // Protected routes
   {
