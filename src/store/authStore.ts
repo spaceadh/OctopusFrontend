@@ -12,10 +12,10 @@ export type User = {
   _id: string;
   email: string;
   profileImageUrl: string;
-  nickName: string;
+  name: string; // Changed from nickName to name
   role: string;
   language: string;
-  theme: string;
+  theme:string;
   subscriptions: string[];
 };
 
@@ -28,7 +28,7 @@ export type AuthContextType = {
   user: User | null;
   accessToken: string;
   refreshToken: string;
-  registermerchant: (formData: FormData) => Promise<void>;
+  register: (formData: any) => Promise<void>; // Renamed and updated signature
   getUser: (accessToken: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -173,7 +173,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const registermerchant = async (formData: FormData) => {
+  const register = async (formData: any) => {
     setIsLoading(true);
     try {
       const userAgent = navigator.userAgent;
@@ -182,11 +182,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         .then((res) => (res.ok ? res.json() : Promise.reject()))
         .then((data) => data.ip)
         .catch(() => 'unknown');
-      const email = formData.get('email') as string;
-      const password = formData.get('password') as string;
-      const businessName = formData.get('businessName') as string;
-      const name = formData.get('name') as string;
-      const phone = formData.get('phone') as string;
+      const { email, password, businessName, name, phone } = formData;
       const deviceInfo = {
         userAgent,
         platform,
@@ -194,7 +190,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         isActivated: localStorage.getItem('NotificationPermission') ?? 'unknown',
       };
       const response = await registerUser({ email, password, businessName, name, phone });
-      const { tokens, user, merchant, paymentMethods } = response;
+      const { tokens, user } = response;
       setUser(user);
       await saveUserTokens(deviceInfo, tokens.accessToken);
       Cookies.remove('access_token');
@@ -252,11 +248,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         user,
         accessToken,
         refreshToken,
-        registermerchant,
+        register,
         getUser,
         login,
         logout,
-        isAuthenticated: !!user, // Added isAuthenticated
+        isAuthenticated: !!user,
         isLoading,
       }}
     >
