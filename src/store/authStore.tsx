@@ -15,7 +15,7 @@ export type User = {
   name: string; // Changed from nickName to name
   role: string;
   language: string;
-  theme:string;
+  theme: string;
   subscriptions: string[];
 };
 
@@ -51,14 +51,12 @@ export interface AuthStoreActions {
   reset: () => void;
 }
 
-
 const initialState: AuthStoreState = {
   user: null,
   accessToken: '',
   refreshToken: '',
   isLoading: true,
 };
-
 
 export const useAuthStore = create<AuthStoreState & AuthStoreActions>()(
   persist(
