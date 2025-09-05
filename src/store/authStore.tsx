@@ -113,8 +113,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        if (refreshToken) return;
-        const token = Cookies.get('refresh_token') || '';
+        const token = refreshToken || Cookies.get('refresh_token') || '';
         if (!token) {
           setIsLoading(false);
           return;
@@ -155,7 +154,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         ip,
         isActivated: localStorage.getItem('NotificationPermission') ?? 'granted',
       };
-      const { tokens, user, merchant, staff, paymentMethods } = response;
+      const { tokens, user, } = response;
       setUser(user);
       Cookies.set('theme', user.theme, { expires: 30 });
       Cookies.remove('access_token');
@@ -207,7 +206,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const getUser = async (accessToken: string) => {
     try {
       const response = await getUserDetails(accessToken);
-      const { tokens, user, merchant, staff, paymentMethods } = response;
+      const { tokens, user, } = response;
       setUser(user);
       Cookies.set('theme', user.theme, { expires: 30 });
       Cookies.remove('access_token');
