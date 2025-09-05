@@ -1,0 +1,10 @@
+{
+  "dashboard": {
+    "title": "Tableau de bord"
+  },
+  "navbar": {
+    "products": "Produits",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
+  }
+}

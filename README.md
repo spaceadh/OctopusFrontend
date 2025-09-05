@@ -1,129 +1,91 @@
-High-Level Context
+# Enterprise SaaS Platform - Frontend
 
-Framework: React + Vite (micro-frontends with shell + plugins).
+This is the frontend for the Enterprise SaaS Platform, a multi-product application built with a micro-frontend architecture.
 
-Styling: TailwindCSS with dark mode toggle.
+## Tech Stack
 
-State: Zustand (global auth/subs/UI) + React Query (data).
+- **Framework:** React 18 + Vite
+- **Language:** TypeScript
+- **Styling:** TailwindCSS with Dark/Light mode
+- **UI Components:** shadcn/ui
+- **State Management:**
+  - **Global State:** Zustand (for auth, subscriptions, UI settings)
+  - **Server State:** React Query (for API caching and data fetching)
+- **Routing:** React Router DOM v6
+- **Forms:** React Hook Form + Yup
+- **i18n:** i18next
 
-Routing: React Router DOM v6 with guards.
+## Directory Structure
 
-2. Project Structure
+- `src/app`: Core application shell (layout, routing, providers).
+- `src/modules`: Micro-frontend modules for each product (e.g., `properties`, `sacco`).
+- `src/components`: Shared UI components.
+- `src/store`: Zustand stores for global state.
+- `src/theme`: Theming configuration and tokens.
+- `src/locales`: JSON files for internationalization.
+- `src/utils`: Utility functions and API client.
 
-src/app/ → Shell app (layout, routing, auth, subscription logic).
+## Getting Started
 
-src/modules/ → Product micro-frontends (properties, sacco, chama, lending).
+### Prerequisites
 
-src/components/ → Shared UI kit (navbar, sidebar, product switcher, toasts, loaders).
+- Node.js (v18 or higher)
+- npm or yarn
+- Docker (optional, for running with Docker)
 
-src/store/ → Zustand stores (auth, subscriptions, UI theme, i18n).
+### Installation
 
-src/theme/ → Theme tokens (colors, typography, spacing).
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
 
-src/locales/ → Language JSON files (en.json, fr.json, sw.json, etc.).
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-src/utils/ → API client, helpers.
+### Running the Development Server
 
-Config: vite.config.ts, tailwind.config.js, .eslintrc.js.
+To start the Vite development server, run:
 
-3. Core Features to Generate
+```bash
+npm run dev
+```
 
-Authentication
+The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
 
-Login/logout, session persistence, refresh tokens.
+## Building for Production
 
-Global user + role + subscription state.
+To create a production build, run:
 
-Authorization
+```bash
+npm run build
+```
 
-Guarded routes by subscription/product access.
+The optimized static assets will be placed in the `dist/` directory.
 
-403 page for blocked products.
+## Running with Docker
 
-Navigation
+This project includes a `Dockerfile` and `docker-compose.yml` for running the application in a container.
 
-Responsive navbar with:
+1.  **Build the Docker image:**
+    ```bash
+    docker-compose build
+    ```
 
-Product switcher (jump between modules).
+2.  **Run the container:**
+    ```bash
+    docker-compose up
+    ```
 
-Profile menu (account, logout, settings).
+The application will be served by Nginx and available at `http://localhost:8080`.
 
-Language switcher.
+## Key Features
 
-Dark/light theme toggle.
-
-Sidebar (per-product menu items, collapsible).
-
-Dashboard Layout
-
-Shared layout with top navbar + sidebar + content pane.
-
-Breadcrumbs support.
-
-Modules (Plugins)
-
-Each module lazy-loaded, self-contained: routes.tsx, pages/, components/.
-
-Example: /properties/dashboard, /sacco/overview.
-
-Shell decides visibility based on subscriptions[].
-
-4. UI/UX Essentials
-
-Theme System
-
-Dark mode toggle (persisted in store).
-
-Branding support → custom logos, colors, and themes per tenant.
-
-Localization (i18n)
-
-JSON-driven translations.
-
-Language switcher in navbar.
-
-Fallback to English if translation missing.
-
-Reusable Components
-
-Buttons (variants).
-
-Tables (pagination, filters, export).
-
-Modals, cards, forms (with validation).
-
-Notifications/toasts/snackbars.
-
-Skeleton loaders + global loading overlay.
-
-5. Developer Experience
-
-Dockerfile → production build.
-
-docker-compose.yaml → integrate with backend services.
-
-README.md → setup + dev guide.
-
-CI/CD → GitHub Actions workflow.
-
-ESLint + Prettier.
-
-Mock API (for quick dev without backend).
-
-6. Key Mentions in Prompt
-
-When writing the actual prompt, ensure these are explicit:
-
-"Create a React + Vite micro-frontend scaffold with a shell app and plugin modules."
-
-"Include global auth + subscription store with guarded routes."
-
-"Provide a navbar with product switcher, profile menu, dark mode toggle, and language switcher."
-
-"Support multi-language (i18n) with JSON-based translations."
-
-"Allow custom branding: logo, theme colors, tenant styles."
-
-"Each product module is lazy-loaded and exposes its own routes."
-
-"Include Dockerfile, docker-compose, README, linting, and CI/CD configs."
+- **Micro-frontend Architecture:** Each product module is self-contained, allowing for independent development and deployment.
+- **Subscription-based Access:** Routes are protected based on the user's subscriptions.
+- **Theming:** Dark and light mode support, with the theme preference persisted in local storage.
+- **Localization:** Support for multiple languages (English, Swahili, French).
+- **Reusable Components:** A rich set of UI components built with shadcn/ui.

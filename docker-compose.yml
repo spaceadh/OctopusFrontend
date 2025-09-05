@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    container_name: my-app-frontend
+    # In a real development setup, you might want to mount volumes
+    # to enable hot-reloading without rebuilding the image.
+    # For this scaffold, we use the production build in the container.
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
+
+networks:
+  default:
+    name: my-app-network

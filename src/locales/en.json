@@ -1,0 +1,10 @@
+{
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "navbar": {
+    "products": "Products",
+    "settings": "Settings",
+    "logout": "Logout"
+  }
+}

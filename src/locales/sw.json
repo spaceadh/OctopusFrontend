@@ -1,0 +1,10 @@
+{
+  "dashboard": {
+    "title": "Dashibodi"
+  },
+  "navbar": {
+    "products": "Bidhaa",
+    "settings": "Mipangilio",
+    "logout": "Toka"
+  }
+}
