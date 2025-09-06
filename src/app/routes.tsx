@@ -6,6 +6,7 @@ import CheckInPage from '@/modules/checkin/pages/CheckInPage';
 import { CheckInLayout } from './layout/CheckInLayout';
 import { ModuleGuard } from './providers/ModuleGuard';
 import { AdminGuard } from './providers/AdminGuard';
+import { LendingLayout } from '@/modules/lending/layout/LendingLayout';
 
 import lendingRoutes from '@/modules/lending/routes';
 import adminRoutes from '@/modules/admin/routes';
@@ -53,7 +54,12 @@ export const router = createBrowserRouter([
           },
           {
             element: <ModuleGuard moduleName="lending" />,
-            children: lendingRoutes,
+            children: [
+              {
+                element: <LendingLayout />,
+                children: lendingRoutes,
+              },
+            ],
           },
         ],
       },

@@ -507,7 +507,9 @@ function SidebarMenuButton({
   ...props
 }: React.ComponentProps<'button'> & {
   asChild?: boolean
+  href?: string
   isActive?: boolean
+  icon?: React.ReactNode
   tooltip?: string | React.ComponentProps<typeof TooltipContent>
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
   const Comp = asChild ? Slot : 'button'
