@@ -58,8 +58,8 @@ const topNav = [
 ];
 
 export function LendingLayout() {
-  const location = useLocation()
-  const getIsActive = (path: string) => location.pathname === path
+  const location = useLocation();
+  const getIsActive = (path: string) => location.pathname === path;
   return (
     <LayoutProvider>
       <SearchProvider>
@@ -144,5 +144,5 @@ export function LendingLayout() {
         </SidebarProvider>
       </SearchProvider>
     </LayoutProvider>
-  )
+  );
 }
