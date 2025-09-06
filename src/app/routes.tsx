@@ -15,6 +15,7 @@ import chamaRoutes from '@/modules/chama/routes';
 import lendingRoutes from '@/modules/lending/routes';
 import adminRoutes from '@/modules/admin/routes';
 import ForgotPasswordPage from '@/modules/auth/pages/ForgotPassword';
+import OTPPage from '@/modules/auth/pages/OTPPage';
 
 export const router = createBrowserRouter([
   // Public routes
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
   {
     path: '/forgot-password',
     element: <ForgotPasswordPage />,
+  },
+  {
+    path: '/otp',
+    element: <OTPPage />,
   },
   // Protected routes
   {

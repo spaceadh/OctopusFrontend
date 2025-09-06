@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "./ui/button"
 import { ChevronsUpDown } from "lucide-react"
-import { useAuth } from "@/store/authStore"
+import { useAuth } from "@/context/authStore"
 import { useNavigate, useLocation } from "react-router-dom"
 import toast from "react-hot-toast"
 

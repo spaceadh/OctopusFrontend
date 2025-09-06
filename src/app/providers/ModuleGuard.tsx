@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAuth } from '@/store/authStore';
+import { useAuth } from '@/context/authStore';
 import toast from 'react-hot-toast';
 
 interface ModuleGuardProps {
