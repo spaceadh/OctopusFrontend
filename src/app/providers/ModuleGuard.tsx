@@ -20,8 +20,8 @@ export const ModuleGuard = ({ moduleName }: ModuleGuardProps) => {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // const hasSubscription = user.subscriptions?.includes(moduleName);
-  const hasSubscription = true; // Temporarily allow access to all modules
+  const hasSubscription = user.subscriptions?.includes(moduleName);
+  // const hasSubscription = true; // Temporarily allow access to all modules
 
   if (!hasSubscription) {
     // User does not have the required subscription, redirect to check-in

@@ -64,7 +64,7 @@ export function UserAuthForm({
       theme: 'light',
       profileImageUrl: 'https://example.com/profile.jpg',
       role: 'user',
-      subscriptions: [],
+      subscriptions: ['lending', 'properties', 'sacco', 'chama'], // Example subscriptions
     }
 
     toast.promise(sleep(2000), {
