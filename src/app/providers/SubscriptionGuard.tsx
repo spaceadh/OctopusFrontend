@@ -1,4 +1,4 @@
-import { useSubscriptionStore } from '@/store/subscriptionStore'
+import { useSubscriptionStore } from '@/context/subscriptionStore'
 import { ReactNode } from 'react'
 
 type Product = 'PROPERTIES' | 'SACCO' | 'CHAMA' | 'LENDING'
