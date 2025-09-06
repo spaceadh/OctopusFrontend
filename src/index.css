@@ -4,59 +4,92 @@
 
 @layer base {
   :root {
+    /* Brand Base */
     --background: 210 20% 98%; /* #F8FAFC */
     --foreground: 215 39% 11%; /* #111827 */
     --card: 0 0% 100%; /* #FFFFFF */
-    --card-foreground: 215 39% 11%; /* #111827 */
-    --popover: 0 0% 100%; /* #FFFFFF */
-    --popover-foreground: 215 39% 11%; /* #111827 */
+    --card-foreground: 215 39% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 39% 11%;
+
+    /* Brand Core */
     --primary: 190 71% 38%; /* #1B9AAA */
     --primary-foreground: 210 17% 98%; /* #F9FAFB */
     --secondary: 210 50% 11%; /* #0D1B2A */
-    --secondary-foreground: 210 17% 98%; /* #F9FAFB */
-    --muted: 210 20% 98%; /* #F8FAFC */
-    --muted-foreground: 215 9% 47%; /* #6B7280 */
+    --secondary-foreground: 210 17% 98%;
     --accent: 178 69% 55%; /* #3DD6D0 */
-    --accent-foreground: 215 39% 11%; /* #111827 */
-    --destructive: 0 72% 51%; /* #DC2626 */
-    --destructive-foreground: 210 17% 98%; /* #F9FAFB */
-    --border: 210 14% 93%; /* #E5E7EB */
-    --input: 210 14% 93%; /* #E5E7EB */
-    --ring: 190 71% 38%; /* #1B9AAA */
+    --accent-foreground: 215 39% 11%;
+
+    /* Neutral / Utility */
+    --muted: 210 20% 98%;
+    --muted-foreground: 215 9% 47%;
+    --border: 210 14% 93%;
+    --input: 210 14% 93%;
+    --ring: var(--primary);
     --radius: 0.5rem;
 
-    /* Module specific accents */
-    --property-accent: 155 42% 30%; /* #2D6A4F */
-    --lending-accent: 42 100% 50%; /* #FFB703 */
-    --sacco-accent: 265 33% 44%; /* #6A4C93 */
-    --chama-accent: 355 79% 56%; /* #E63946 */
+    /* Status Colors */
+    --status-success: 145 74% 36%; /* #16A34A */
+    --status-warning: 38 92% 50%; /* #F59E0B */
+    --status-error: 0 72% 51%; /* #DC2626 */
+    --status-info: 221 83% 53%; /* #2563EB */
 
-    /* Status colors */
-    --success: 145 74% 36%; /* #16A34A */
-    --warning: 38 92% 50%; /* #F59E0B */
-    --info: 221 83% 53%; /* #2563EB */
+    /* Chart Palette (generic slots) */
+    --chart-1: oklch(0.646 0.222 41.116);
+    --chart-2: oklch(0.6 0.118 184.704);
+    --chart-3: oklch(0.398 0.07 227.392);
+    --chart-4: oklch(0.828 0.189 84.429);
+    --chart-5: oklch(0.769 0.188 70.08);
+
+    /* Sidebar */
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
   }
 
+  /* Dark Mode Overrides */
   .dark {
     --background: 220 23% 5%; /* #0B0C10 */
-    --foreground: 210 17% 98%; /* #F9FAFB */
+    --foreground: 210 17% 98%;
     --card: 215 28% 17%; /* #1F2937 */
-    --card-foreground: 210 17% 98%; /* #F9FAFB */
-    --popover: 215 28% 17%; /* #1F2937 */
-    --popover-foreground: 210 17% 98%; /* #F9FAFB */
+    --card-foreground: 210 17% 98%;
+    --popover: 215 28% 17%;
+    --popover-foreground: 210 17% 98%;
     --primary: 178 69% 55%; /* #3DD6D0 */
-    --primary-foreground: 215 39% 11%; /* #111827 */
+    --primary-foreground: 215 39% 11%;
     --secondary: 190 71% 38%; /* #1B9AAA */
-    --secondary-foreground: 210 17% 98%; /* #F9FAFB */
-    --muted: 215 28% 17%; /* #1F2937 */
-    --muted-foreground: 215 9% 47%; /* #6B7280 */
+    --secondary-foreground: 210 17% 98%;
+    --muted: 215 28% 17%;
+    --muted-foreground: 215 9% 47%;
     --accent: 190 71% 38%; /* #1B9AAA */
-    --accent-foreground: 210 17% 98%; /* #F9FAFB */
+    --accent-foreground: 210 17% 98%;
     --destructive: 355 79% 56%; /* #E63946 */
-    --destructive-foreground: 210 17% 98%; /* #F9FAFB */
+    --destructive-foreground: 210 17% 98%;
     --border: 215 14% 22%; /* #374151 */
     --input: 215 14% 22%; /* #374151 */
-    --ring: 178 69% 55%; /* #3DD6D0 */
+    --ring: var(--primary);
+  }
+
+  /* Module Overrides */
+  .module-property {
+    --accent: 155 42% 30%; /* #2D6A4F */
+  }
+
+  .module-lending {
+    --accent: 42 100% 50%; /* #FFB703 */
+  }
+
+  .module-sacco {
+    --accent: 265 33% 44%; /* #6A4C93 */
+  }
+
+  .module-chama {
+    --accent: 355 79% 56%; /* #E63946 */
   }
 }
 
