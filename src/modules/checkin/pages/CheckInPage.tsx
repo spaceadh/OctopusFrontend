@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '@/apis/products';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,10 +12,11 @@ type Product = {
   name: string;
   description: string;
   subscribed: boolean;
+  redirect?: string;
 };
 
 const CheckInPage = () => {
-  // const [viewMode] = useState('list'); // Default to list view, no need for state change
+  const navigate = useNavigate();
 
   const { data: products, isLoading, error } = useQuery<Product[], Error>({
     queryKey: ['products'],
@@ -53,11 +55,11 @@ const CheckInPage = () => {
         <CardContent>
           <div className="space-y-4">
             {subscribedProducts.map(product => (
-              <Card key={product.id}>
-                <CardHeader>
-                  <CardTitle className="text-lg sm:text-xl">{product.name}</CardTitle>
-                  <CardDescription className="text-sm sm:text-base">{product.description}</CardDescription>
-                </CardHeader>
+              <Card key={product.id} className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => product.redirect && navigate(product.redirect)}>
+              <CardHeader>
+                <CardTitle className="text-lg sm:text-xl">{product.name}</CardTitle>
+                <CardDescription className="text-sm sm:text-base">{product.description}</CardDescription>
+              </CardHeader>
               </Card>
             ))}
           </div>

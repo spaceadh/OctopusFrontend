@@ -1,5 +1,5 @@
 import { RouteObject, Outlet } from 'react-router-dom'
-import LendingDashboardPage from './pages/DashboardPage'
+import { Dashboard } from './pages/DashboardPage'
 import LoansListPage from './pages/LoansListPage'
 import BorrowersListPage from './pages/BorrowersListPage'
 
@@ -10,7 +10,7 @@ const lendingRoutes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <LendingDashboardPage />,
+        element: <Dashboard />,
       },
       {
         path: 'loans',

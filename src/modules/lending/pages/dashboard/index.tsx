@@ -14,10 +14,10 @@ import { TopNav } from '@/modules/lending/lending-components/top-nav'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { Overview } from '../pages/dashboard/components/overview'
-import { RecentSales } from '../pages/dashboard/components/recent-sales'
+import { Overview } from './components/overview'
+import { RecentSales } from './components/recent-sales'
 
-export function Dashboard() {
+export default function Dashboard() {
   return (
     <>
       {/* ===== Top Heading ===== */}

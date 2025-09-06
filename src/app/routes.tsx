@@ -3,7 +3,7 @@ import { ModuleLayout } from './layout/ModuleLayout';
 import ProtectedRoute from './layout/ProtectedRoute';
 import LoginPage from '@/modules/auth/pages/LoginPage';
 import RegisterPage from '@/modules/auth/pages/RegisterPage';
-import CheckInPage from '@/modules/dashboard/pages/CheckInPage';
+import CheckInPage from '@/modules/checkin/pages/CheckInPage';
 import { CheckInLayout } from './layout/CheckInLayout';
 import { ModuleGuard } from './providers/ModuleGuard';
 import { AdminGuard } from './providers/AdminGuard';
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'app',
-        element: <ModuleLayout />,
+        // element: <ModuleLayout />,
         children: [
           {
             element: <AdminGuard />,
