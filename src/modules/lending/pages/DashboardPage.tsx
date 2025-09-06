@@ -7,15 +7,15 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ConfigDrawer } from '@/components/config-drawer'
+import { ConfigDrawer } from '@/modules/lending/lending-components/config-drawer'
 import { Header } from '@/modules/lending/lending-components/header'
 import { Main } from '@/modules/lending/lending-components/main'
 import { TopNav } from '@/modules/lending/lending-components/top-nav'
-import { ProfileDropdown } from '@/components/profile-dropdown'
+import { ProfileDropdown } from '@/modules/lending/lending-components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { Overview } from '../pages/dashboard/components/overview'
-import { RecentSales } from '../pages/dashboard/components/recent-sales'
+import { Overview } from '@/modules/lending/pages/dashboard/components/overview'
+import { RecentSales } from '@/modules/lending/pages/dashboard/components/recent-sales'
 
 export function Dashboard() {
   return (
