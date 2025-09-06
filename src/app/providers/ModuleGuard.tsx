@@ -1,5 +1,6 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '@/store/authStore';
+import toast from 'react-hot-toast';
 
 interface ModuleGuardProps {
   moduleName: string;
@@ -20,6 +21,7 @@ export const ModuleGuard = ({ moduleName }: ModuleGuardProps) => {
   }
 
   const hasSubscription = user.subscriptions?.includes(moduleName);
+  // const hasSubscription = true; // Temporarily allow access to all modules
 
   if (!hasSubscription) {
     // User does not have the required subscription, redirect to check-in
