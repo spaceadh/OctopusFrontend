@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { DashboardLayout } from './layout/DashboardLayout';
 import { ModuleLayout } from './layout/ModuleLayout';
 import ProtectedRoute from './layout/ProtectedRoute';
 import LoginPage from '@/modules/auth/pages/LoginPage';
@@ -18,7 +17,6 @@ import ForgotPasswordPage from '@/modules/auth/pages/ForgotPassword';
 import OTPPage from '@/modules/auth/pages/OTPPage';
 
 export const router = createBrowserRouter([
-  // Public routes
   {
     path: '/login',
     element: <LoginPage />,
