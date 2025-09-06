@@ -24,6 +24,8 @@ import {
 } from 'lucide-react';
 import { SidebarMenu, SidebarMenuButton } from '@/components/ui/sidebar';
 import { useLocation } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+
 
 const topNav = [
   {
@@ -125,5 +127,3 @@ export function LendingLayout() {
     </LayoutProvider>
   );
 }
-
-import { Button } from '@/components/ui/button';
