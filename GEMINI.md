@@ -1,0 +1,1 @@
+Kindly ensure that the dark mode feature is working as it should...same as the config drawer.,

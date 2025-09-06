@@ -15,6 +15,7 @@ import { cn } from '@/lib/utils'
 import { useDirection } from '@/context/direction-provider'
 import { type Collapsible, useLayout } from '@/context/layout-provider'
 import { useTheme } from '@/context/theme-provider'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -53,7 +54,10 @@ export function ConfigDrawer() {
           <Settings aria-hidden='true' />
         </Button>
       </SheetTrigger>
-      <SheetContent className='flex flex-col'>
+      <SheetContent
+        className='flex flex-col'
+        data-testid='config-drawer-content'
+      >
         <SheetHeader className='pb-0 text-start'>
           <SheetTitle>Theme Settings</SheetTitle>
           <SheetDescription id='config-drawer-description'>
@@ -65,6 +69,7 @@ export function ConfigDrawer() {
           <SidebarConfig />
           <LayoutConfig />
           <DirConfig />
+          <LanguageConfig />
         </div>
         <SheetFooter className='gap-2'>
           <Button
@@ -109,6 +114,56 @@ function SectionTitle({
           <RotateCcw className='size-3' />
         </Button>
       )}
+    </div>
+  )
+}
+
+function LanguageConfig() {
+  const { i18n } = useTranslation()
+
+  const languages = [
+    { value: 'en', label: 'English' },
+    { value: 'fr', label: 'French' },
+    { value: 'sw', label: 'Swahili' },
+  ]
+
+  return (
+    <div>
+      <SectionTitle title='Language' />
+      <Radio
+        value={i18n.language}
+        onValueChange={(value) => i18n.changeLanguage(value)}
+        className='grid w-full max-w-md grid-cols-3 gap-4'
+        aria-label='Select language'
+      >
+        {languages.map((lang) => (
+          <Item
+            key={lang.value}
+            value={lang.value}
+            className='group outline-none'
+            aria-label={`Select ${lang.label}`}
+          >
+            <div
+              className={cn(
+                'ring-border relative rounded-[6px] ring-[1px]',
+                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl',
+                'group-focus-visible:ring-2',
+                'flex items-center justify-center p-4'
+              )}
+            >
+              <CircleCheck
+                className={cn(
+                  'fill-primary size-6 stroke-white',
+                  'group-data-[state=unchecked]:hidden',
+                  'absolute top-0 right-0 translate-x-1/2 -translate-y-1/2'
+                )}
+                aria-hidden='true'
+              />
+              <span className='text-sm font-medium'>{lang.label}</span>
+            </div>
+          </Item>
+        ))}
+      </Radio>
     </div>
   )
 }
