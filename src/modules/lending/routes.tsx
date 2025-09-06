@@ -1,12 +1,27 @@
-import { RouteObject } from 'react-router-dom'
-
-const LendingDashboard = () => <div>Lending Dashboard</div>
+import { RouteObject, Outlet } from 'react-router-dom'
+import LendingDashboardPage from './pages/DashboardPage'
+import LoansListPage from './pages/LoansListPage'
+import BorrowersListPage from './pages/BorrowersListPage'
 
 const lendingRoutes: RouteObject[] = [
   {
     path: 'lending',
-    element: <LendingDashboard />,
-    // Add lending-related routes here
+    element: <Outlet />,
+    children: [
+      {
+        index: true,
+        element: <LendingDashboardPage />,
+      },
+      {
+        path: 'loans',
+        element: <LoansListPage />,
+      },
+      {
+        path: 'borrowers',
+        element: <BorrowersListPage />,
+      },
+      // Add lending-related routes here
+    ],
   },
 ]
 

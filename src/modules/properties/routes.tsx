@@ -1,22 +1,24 @@
 import { SubscriptionGuard } from '@/app/providers/SubscriptionGuard'
-import { RouteObject } from 'react-router-dom'
-
-// Example page components (to be created)
-const PropertiesDashboard = () => <div>Properties Dashboard</div>
-const PropertyList = () => <div>Property List</div>
+import { RouteObject, Outlet } from 'react-router-dom'
+import PropertiesDashboardPage from './pages/DashboardPage'
+import PropertiesListPage from './pages/PropertiesListPage'
 
 const propertiesRoutes: RouteObject[] = [
   {
     path: 'properties',
     element: (
       <SubscriptionGuard product="PROPERTIES">
-        <PropertiesDashboard />
+        <Outlet />
       </SubscriptionGuard>
     ),
     children: [
       {
         index: true,
-        element: <PropertyList />,
+        element: <PropertiesDashboardPage />,
+      },
+      {
+        path: 'listing',
+        element: <PropertiesListPage />,
       },
       // Add other properties-related routes here
     ],

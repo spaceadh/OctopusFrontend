@@ -1,19 +1,20 @@
 import { Button } from "./ui/button";
-import { Bell, Home, LineChart, Package, ShoppingCart, Users, AppWindow } from "lucide-react";
+import { Bell, AppWindow } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { href: "/app/dashboard", icon: Home, label: "Dashboard" },
-  { href: "/app/orders", icon: ShoppingCart, label: "Orders" },
-  { href: "/app/products", icon: Package, label: "Products" },
-  { href: "/app/customers", icon: Users, label: "Customers" },
-  { href: "/app/analytics", icon: LineChart, label: "Analytics" },
-];
+interface SidebarLink {
+  href: string;
+  label: string;
+  icon: React.ElementType;
+}
 
-export function Sidebar() {
+interface SidebarProps {
+  links: SidebarLink[];
+}
+
+export function Sidebar({ links }: SidebarProps) {
   const { pathname } = useLocation();
-  // TODO: The links should be dynamic based on the current module
   return (
     <div className="hidden border-r bg-card md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
@@ -29,7 +30,7 @@ export function Sidebar() {
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            {navLinks.map((link) => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}

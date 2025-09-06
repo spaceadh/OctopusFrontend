@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { DashboardLayout } from './layout/DashboardLayout';
+import { ModuleLayout } from './layout/ModuleLayout';
 import ProtectedRoute from './layout/ProtectedRoute';
 import LoginPage from '@/modules/auth/pages/LoginPage';
 import RegisterPage from '@/modules/auth/pages/RegisterPage';
@@ -46,7 +47,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'app',
-        element: <DashboardLayout />,
+        element: <ModuleLayout />,
         children: [
           {
             element: <AdminGuard />,

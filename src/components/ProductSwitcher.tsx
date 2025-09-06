@@ -6,21 +6,28 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "./ui/button"
 import { ChevronsUpDown } from "lucide-react"
-// import { useSubscriptionStore } from "@/store/subscriptionStore"
-// import { useNavigate } from "react-router-dom"
+import { useAuth } from "@/store/authStore"
+import { useNavigate, useLocation } from "react-router-dom"
+import toast from "react-hot-toast"
 
 export function ProductSwitcher() {
-  // const { subscriptions } = useSubscriptionStore()
-  // const navigate = useNavigate()
+  const { user } = useAuth()
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  // TODO: Get product list and current product from a store or context
-  const products = [
-    { name: "Properties", path: "/properties" },
-    { name: "Sacco", path: "/sacco" },
-    { name: "Chama", path: "/chama" },
-    { name: "Lending", path: "/lending" },
-  ]
-  const currentProduct = "Properties"
+  const products = user?.subscriptions?.map((sub) => ({
+    name: sub.charAt(0).toUpperCase() + sub.slice(1).toLowerCase(),
+    path: `/app/${sub.toLowerCase()}`,
+  })) || []
+
+  const currentModule = location.pathname.split('/')[2]
+  const currentProduct = products.find(p => p.path.endsWith(currentModule))?.name || 'Select Module'
+
+
+  const handleSwitch = (path: string) => {
+    navigate(path)
+    toast.success(`Switched to ${path.split('/').pop()} module`)
+  }
 
   return (
     <DropdownMenu>
@@ -34,8 +41,7 @@ export function ProductSwitcher() {
         {products.map((product) => (
           <DropdownMenuItem
             key={product.path}
-            // onClick={() => navigate(product.path)}
-            // disabled={!subscriptions.includes(product.name.toUpperCase() as any)}
+            onClick={() => handleSwitch(product.path)}
           >
             {product.name}
           </DropdownMenuItem>
