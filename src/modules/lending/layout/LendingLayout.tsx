@@ -1,18 +1,18 @@
-import { Outlet } from 'react-router-dom';
-import { LayoutProvider } from '@/context/layout-provider';
-import { SearchProvider } from '@/context/search-provider';
+import { Outlet } from 'react-router-dom'
+import { LayoutProvider } from '@/context/layout-provider'
+import { SearchProvider } from '@/context/search-provider'
 import {
   Sidebar,
   SidebarProvider,
   SidebarInset,
-} from '@/components/ui/sidebar';
-import { Header } from '../lending-components/header';
-import { Main } from '../lending-components/main';
-import { TopNav } from '../lending-components/top-nav';
-import { ProfileDropdown } from '../lending-components/profile-dropdown';
-import { Search } from '@/components/search';
-import { ThemeSwitch } from '@/components/theme-switch';
-import { ConfigDrawer } from '../lending-components/config-drawer';
+} from '@/components/ui/sidebar'
+import { Header } from '../lending-components/header'
+import { Main } from '../lending-components/main'
+import { TopNav } from '../lending-components/top-nav'
+import { ProfileDropdown } from '../lending-components/profile-dropdown'
+import { Search } from '@/components/search'
+import { ThemeSwitch } from '@/components/theme-switch'
+import { ConfigDrawer } from '../lending-components/config-drawer'
 import {
   BellIcon,
   HomeIcon,
@@ -21,11 +21,18 @@ import {
   PackageIcon,
   SettingsIcon,
   UsersIcon,
-} from 'lucide-react';
-import { SidebarMenu, SidebarMenuButton } from '@/components/ui/sidebar';
-import { useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-
+} from 'lucide-react'
+import { SidebarMenu, SidebarMenuButton } from '@/components/ui/sidebar'
+import { useLocation } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import React from 'react'
 
 const topNav = [
   {
@@ -51,14 +58,17 @@ const topNav = [
 ];
 
 export function LendingLayout() {
-  const location = useLocation();
-  const getIsActive = (path: string) => location.pathname === path;
+  const location = useLocation()
+  const getIsActive = (path: string) => location.pathname === path
   return (
     <LayoutProvider>
       <SearchProvider>
         <SidebarProvider>
           <Sidebar>
-            <div className="flex h-full flex-col justify-between">
+            <div
+              className="flex h-full flex-col justify-between"
+              data-testid="sidebar-scroll-container"
+            >
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-2 p-4">
                   <Package2Icon className="h-6 w-6" />
@@ -92,15 +102,24 @@ export function LendingLayout() {
                 </SidebarMenu>
               </div>
               <div className="flex flex-col gap-4 p-4">
-                <SidebarMenu>
-                  <SidebarMenuButton
-                    href="#"
-                    icon={<SettingsIcon />}
-                    className="mt-auto"
-                  >
-                    Settings
-                  </SidebarMenuButton>
-                </SidebarMenu>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <SidebarMenuButton
+                      icon={<SettingsIcon />}
+                      className="mt-auto"
+                    >
+                      Settings
+                    </SidebarMenuButton>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Settings</DialogTitle>
+                    </DialogHeader>
+                    <div className="py-4">
+                      <p>This is the settings dialog.</p>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </Sidebar>
@@ -125,5 +144,5 @@ export function LendingLayout() {
         </SidebarProvider>
       </SearchProvider>
     </LayoutProvider>
-  );
+  )
 }
