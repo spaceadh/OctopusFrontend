@@ -23,15 +23,16 @@ import {
   GalleryVerticalEnd,
 } from 'lucide-react'
 import { ClerkLogo } from '@/assets/clerk-logo'
-import { type SidebarData } from '../types'
+import { type CommandSidebarData } from '../types'
+import { useAuth, useAuthStore } from '@/context/authStore'
 
-export const sidebarData: SidebarData = {
+export const commandSidebarData: CommandSidebarData = {
   user: {
     name: 'satnaing',
     email: 'satnaingdev@gmail.com',
     avatar: '/avatars/shadcn.jpg',
   },
-  teams: [
+  products: [
     {
       name: 'Shadcn Admin',
       logo: Command,
@@ -54,109 +55,18 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'Dashboard',
-          url: '/',
+          url: '/app/lending',
           icon: LayoutDashboard,
         },
         {
-          title: 'Tasks',
-          url: '/tasks',
+          title: 'Customers',
+          url: '/app/lending/customers',
           icon: ListTodo,
         },
         {
-          title: 'Apps',
-          url: '/apps',
+          title: 'Settings',
+          url: '/app/lending/settings',
           icon: Package,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: MessagesSquare,
-        },
-        {
-          title: 'Users',
-          url: '/users',
-          icon: Users,
-        },
-        {
-          title: 'Secured by Clerk',
-          icon: ClerkLogo,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/clerk/sign-in',
-            },
-            {
-              title: 'Sign Up',
-              url: '/clerk/sign-up',
-            },
-            {
-              title: 'User Management',
-              url: '/clerk/user-management',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Pages',
-      items: [
-        {
-          title: 'Auth',
-          icon: ShieldCheck,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/sign-in',
-            },
-            {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
-            },
-            {
-              title: 'Sign Up',
-              url: '/sign-up',
-            },
-            {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
-            },
-          ],
-        },
-        {
-          title: 'Errors',
-          icon: Bug,
-          items: [
-            {
-              title: 'Unauthorized',
-              url: '/errors/unauthorized',
-              icon: Lock,
-            },
-            {
-              title: 'Forbidden',
-              url: '/errors/forbidden',
-              icon: UserX,
-            },
-            {
-              title: 'Not Found',
-              url: '/errors/not-found',
-              icon: FileX,
-            },
-            {
-              title: 'Internal Server Error',
-              url: '/errors/internal-server-error',
-              icon: ServerOff,
-            },
-            {
-              title: 'Maintenance Error',
-              url: '/errors/maintenance-error',
-              icon: Construction,
-            },
-          ],
         },
       ],
     },
@@ -203,3 +113,93 @@ export const sidebarData: SidebarData = {
     },
   ],
 }
+
+// Updated sidebarData to use authStore
+export const sidebarData = {
+  user: () => {
+    const { user } = useAuthStore()
+    return {
+      name: user?.name || 'User',
+      email: user?.email || 'user@example.com',
+      avatar: user?.profileImageUrl || '/avatars/01.png',
+    };
+  },
+  otherProductMenus: [
+    {
+      name: 'Shadcn Admin',
+      logo: Command,
+      plan: 'Vite + ShadcnUI',
+    },
+    {
+      name: 'Acme Inc',
+      logo: GalleryVerticalEnd,
+      plan: 'Enterprise',
+    },
+    {
+      name: 'Acme Corp.',
+      logo: AudioWaveform,
+      plan: 'Startup',
+    },
+  ],
+  productMenus: [
+    {
+      title: 'General',
+      items: [
+        {
+          title: 'Dashboard',
+          url: '/',
+          icon: LayoutDashboard,
+          isActive: false, // Handled dynamically
+        },
+        {
+          title: 'Customers',
+          url: '/customers',
+          icon: ListTodo,
+          isActive: false,
+        },
+        {
+          title: 'Products',
+          url: '/products',
+          icon: Package,
+          isActive: false,
+        },
+      ],
+    },
+    {
+      title: 'Other',
+      items: [
+        {
+          title: 'Settings',
+          icon: Settings,
+          items: [
+            {
+              title: 'Profile',
+              url: '/settings',
+              icon: UserCog,
+            },
+            {
+              title: 'Account',
+              url: '/settings/account',
+              icon: Wrench,
+            },
+            {
+              title: 'Appearance',
+              url: '/settings/appearance',
+              icon: Palette,
+            },
+            {
+              title: 'Notifications',
+              url: '/settings/notifications',
+              icon: Bell,
+            },
+            {
+              title: 'Display',
+              url: '/settings/display',
+              icon: Monitor,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};

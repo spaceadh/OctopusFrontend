@@ -13,45 +13,38 @@ import { SignUpForm } from '../components/SignUpForm'
 export default function SignUp() {
   return (
     <AuthLayout>
-      <Card className='gap-4'>
-        <CardHeader>
-          <CardTitle className='text-lg tracking-tight'>
-            Create an account
-          </CardTitle>
-          <CardDescription>
-            Enter your email and password to create an account. <br />
-            Already have an account?{' '}
+      <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-200 p-6">
+        <div className="card-body">
+          <h2 className="card-title text-lg font-serif text-base-content">Create an account</h2>
+          <p className="text-base-content/70 mb-4">
+            Enter your email and password to create an account.{' '}
             <Link
-              to='/login'
-              className='hover:text-primary underline underline-offset-4'
+              to="/login"
+              className="text-[rgb(212,175,55)] hover:text-[rgb(212,175,55)]/90 underline underline-offset-4"
             >
               Sign In
             </Link>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+          </p>
           <SignUpForm />
-        </CardContent>
-        <CardFooter>
-          <p className='text-muted-foreground px-8 text-center text-sm'>
+          <div className="mt-4 text-center text-sm text-base-content/70">
             By creating an account, you agree to our{' '}
-            <a
-              href='/terms'
-              className='hover:text-primary underline underline-offset-4'
+            <Link
+              to="/terms"
+              className="text-[rgb(212,175,55)] hover:text-[rgb(212,175,55)]/90 underline underline-offset-4"
             >
               Terms of Service
-            </a>{' '}
+            </Link>{' '}
             and{' '}
-            <a
-              href='/privacy'
-              className='hover:text-primary underline underline-offset-4'
+            <Link
+              to="/privacy"
+              className="text-[rgb(212,175,55)] hover:text-[rgb(212,175,55)]/90 underline underline-offset-4"
             >
               Privacy Policy
-            </a>
+            </Link>
             .
-          </p>
-        </CardFooter>
-      </Card>
+          </div>
+        </div>
+      </div>
     </AuthLayout>
-  )
+  );
 }
