@@ -35,6 +35,7 @@ const topNav = sidebarData.productMenus
   }));
 
 export function LendingLayout() {
+  console.log('LendingLayout mounted');
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useAuthStore();

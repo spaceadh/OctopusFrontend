@@ -9,6 +9,7 @@ import { Overview } from '@/modules/lending/pages/dashboard/components/overview'
 import { t } from 'i18next';
 
 export async function Dashboard() {
+  console.log('Dashboard mounted');
   const { user , refreshToken} = useAuthStore();
   const { lendingStatsData, error, fetchLendingStats } = useLendingBoundStore();
   const [loading, setLoading] = useState(false);
@@ -19,9 +20,12 @@ export async function Dashboard() {
   };
   // use effect to redirect if no user
   if (user) {
-    await fetchLendingStats(refreshToken || '');
+    // await fetchLendingStats(refreshToken || '');
     setLoading(true);
   }
+
+  console.log('Lending Stats Data:', lendingStatsData);
+  console.log('Error:', loading, error);
 
   if (!lendingStatsData || loading) {
     return (
