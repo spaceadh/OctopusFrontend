@@ -32,6 +32,14 @@ export const commandSidebarData: CommandSidebarData = {
     email: 'satnaingdev@gmail.com',
     avatar: '/avatars/shadcn.jpg',
   },
+  // user: () => {
+  //   const { user } = useAuthStore()
+  //   return {
+  //     name: user?.name || 'User',
+  //     email: user?.email || 'user@example.com',
+  //     avatar: user?.profileImageUrl || '/avatars/01.png',
+  //   };
+  // },
   products: [
     {
       name: 'Shadcn Admin',

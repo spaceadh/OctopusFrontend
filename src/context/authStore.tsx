@@ -5,7 +5,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import toast from 'react-hot-toast';
 import { consoleLogger } from '@/utils/logger';
-import { loginUser, registerUser, saveUserTokens, getUserDetails, logoutUser, verifyUserSession } from '@/apis/auth';
+import { loginUser, registerUser, saveUserTokens, getUserDetails, logoutUser, verifyUserSession } from '@/modules/auth/apis/auth';
 
 export type User = {
   id: string;

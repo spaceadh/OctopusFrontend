@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getProducts } from '@/apis/products';
+import { getProducts } from '@/modules/auth/apis/products';
 import toast from 'react-hot-toast';
 
 type Product = {

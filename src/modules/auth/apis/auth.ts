@@ -1,13 +1,15 @@
 import axios from 'axios';
-import {ProtectedAPIUtil, PublicAPIUtil}  from '../utils/apiClient';
+import { ProtectedAPIUtil, PublicAPIUtil }  from '@/utils/apiClient';
 const API_URL = import.meta.env['VITE_API_URL'] || 'http://localhost:5000/api';
+
+export const authModuleendpoint = `${API_URL}/auth`;
 
 // Function to register a new user
 export const registerUser = async (userData: any) => {
   try {
     const { name, email, password,businessName,phone } = userData;
     const api = PublicAPIUtil();
-    const response = await api.post(`${API_URL}/auth/register`, { businessName, email, password,phone, name });
+    const response = await api.post(`${authModuleendpoint}/register`, { businessName, email, password,phone, name });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -21,7 +23,7 @@ export const saveUserTokens = async (deviceInfo: any,accessToken:string) => {
   try {
     const api = ProtectedAPIUtil(accessToken);
     const { userAgent, platform, ip, FCMToken,isActivated } = deviceInfo;
-    const response = await api.post(`${API_URL}/auth/save-token`, { userAgent, platform, ip, FCMToken,isActivated,role: 'merchant' });
+    const response = await api.post(`${authModuleendpoint}/auth/save-token`, { userAgent, platform, ip, FCMToken,isActivated,role: 'merchant' });
     return response.data;
   }catch (error) {
     if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -34,7 +36,7 @@ export const saveUserTokens = async (deviceInfo: any,accessToken:string) => {
 export const getUserDetails = async (accessToken:string) => {
   try {
     const api = ProtectedAPIUtil(accessToken);
-    const response = await api.get(`${API_URL}/auth/getUserDetails`, {});
+    const response = await api.get(`${authModuleendpoint}/auth/getUserDetails`, {});
     return response.data;
   }catch (error) {
     if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -49,7 +51,7 @@ export const loginUser = async (userData: any) => {
     try {
       const { email, password } = userData;
       const api = PublicAPIUtil();
-      const response = await api.post(`${API_URL}/auth/login`, { email, password });
+      const response = await api.post(`${authModuleendpoint}/auth/login`, { email, password });
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -63,7 +65,7 @@ export const forgetPassword = async (userData: any) => {
     try {
       const { email } = userData;
       const api = PublicAPIUtil();
-      const response = await api.post(`${API_URL}/auth/forget_password`, { email});
+      const response = await api.post(`${authModuleendpoint}/auth/forget_password`, { email});
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -77,7 +79,7 @@ export const confirmToken = async (userData: any) => {
     try {
       const { token } = userData;
       const api = PublicAPIUtil();
-      const response = await api.post(`${API_URL}/auth/confirm-token`, { token });
+      const response = await api.post(`${authModuleendpoint}/auth/confirm-token`, { token });
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -91,7 +93,7 @@ export const confirmToken = async (userData: any) => {
 export const logoutUser = async () => {
   try {
     const api = PublicAPIUtil();
-    const response = await api.post(`${API_URL}/auth/logout`, {});
+    const response = await api.post(`${authModuleendpoint}/auth/logout`, {});
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -104,7 +106,7 @@ export const logoutUser = async () => {
 export const verifyUserSession = async (accessToken:string) => {
   try {
     const api = ProtectedAPIUtil(accessToken);
-    const response = await api.post(`${API_URL}/auth/verify`, {});
+    const response = await api.post(`${authModuleendpoint}/auth/verify`, {});
     return response.data;
   } catch (error) {
     // console.log('Error verify user', error); 
@@ -118,7 +120,7 @@ export const verifyUserSession = async (accessToken:string) => {
 export const forgotPassword = async (email:string) => {
   try {
     const api = PublicAPIUtil();
-    const response = await api.post(`${API_URL}/auth/forgot-password`, { email });
+    const response = await api.post(`${authModuleendpoint}/auth/forgot-password`, { email });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -131,7 +133,7 @@ export const forgotPassword = async (email:string) => {
 export const resetPassword = async (userData: any) => {
     try {
       const api = PublicAPIUtil();
-      const response = await api.post(`${API_URL}/auth/reset-password`, userData);
+      const response = await api.post(`${authModuleendpoint}/auth/reset-password`, userData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -144,7 +146,7 @@ export const resetPassword = async (userData: any) => {
 export const getOauthAuthorization = async (accessToken:string) => {
   try {
     const api = ProtectedAPIUtil(accessToken);
-    const response = await api.get(`${API_URL}/auth/oauth-authorization`, {});
+    const response = await api.get(`${authModuleendpoint}/auth/oauth-authorization`, {});
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -157,7 +159,7 @@ export const getOauthAuthorization = async (accessToken:string) => {
 export const hasCompletedOnboarding = async (accessToken: string) => {
   try {
     const api = ProtectedAPIUtil(accessToken);
-    const response = await api.post(`${API_URL}/auth/complete-onboarding`, {});
+    const response = await api.post(`${authModuleendpoint}/auth/complete-onboarding`, {});
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.data?.message) {
@@ -171,7 +173,7 @@ export const FinishAuthorization = async (formData:any, accessToken:string) => {
   try {
     const api = ProtectedAPIUtil(accessToken);
     const { role, name, phone, businessName } = formData;
-    const response = await api.post(`${API_URL}/auth/complete-authorization`, {
+    const response = await api.post(`${authModuleendpoint}/auth/complete-authorization`, {
       role,name,phone,businessName
     });
     return response.data;
@@ -187,7 +189,7 @@ export const FinishAuthorization = async (formData:any, accessToken:string) => {
 export const checkBusinessNameAvailability = async (businessName: string) => {
   try {
     const api = PublicAPIUtil();
-    const response = await api.get(`${API_URL}/auth/check-business-name/${businessName}`);
+    const response = await api.get(`${authModuleendpoint}/auth/check-business-name/${businessName}`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response?.data?.message) {

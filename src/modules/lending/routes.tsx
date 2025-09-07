@@ -1,7 +1,11 @@
-import { RouteObject, Outlet } from 'react-router-dom'
+import { RouteObject, Outlet, Navigate } from 'react-router-dom'
 import { Dashboard } from './pages/DashboardPage'
 import LoansListPage from './pages/LoansListPage'
 import BorrowersListPage from './pages/BorrowersListPage'
+import { useAuth } from '@/context/authStore';
+import { Skeleton } from '@/components/ui/skeleton';
+import React from 'react';
+import DataLoader  from '@/modules/lending/context/DataLoader';
 
 const lendingRoutes: RouteObject[] = [
   {
@@ -10,17 +14,26 @@ const lendingRoutes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: <DataLoader path="/dashboard">
+          <Dashboard />
+        </DataLoader>,
       },
       {
         path: 'loans',
-        element: <LoansListPage />,
+        element: (
+          <DataLoader path="/loans">
+            <LoansListPage />
+          </DataLoader>
+        ),
       },
       {
         path: 'borrowers',
-        element: <BorrowersListPage />,
+        element: (
+          <DataLoader path="/borrowers">
+            <BorrowersListPage />
+          </DataLoader>
+        ),
       },
-      // Add lending-related routes here
     ],
   },
 ]

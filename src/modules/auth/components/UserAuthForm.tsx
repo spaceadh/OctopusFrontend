@@ -57,7 +57,7 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
       _id: '12345',
       language: 'en',
       theme: 'light',
-      profileImageUrl: 'https://example.com/profile.jpg',
+      profileImageUrl: 'https://cdn-icons-png.flaticon.com/128/4333/4333609.png',
       role: 'user',
       subscriptions: ['lending', 'properties', 'sacco', 'chama'],
     };
