@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
   Card,
   CardContent,
@@ -11,41 +11,36 @@ import { AuthLayout } from '../layout/AuthLayout'
 import { UserAuthForm } from '../components/UserAuthForm';
 
 export default function SignIn() {
-  const { redirect } = useLocation().state || {}
+  const { redirect } = useLocation().state || {};
 
   return (
     <AuthLayout>
-      <Card className='gap-4'>
-        <CardHeader>
-          <CardTitle className='text-lg tracking-tight'>Sign in</CardTitle>
-          <CardDescription>
-            Enter your email and password below to <br />
-            log into your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-200 p-6">
+        <div className="card-body">
+          <h2 className="card-title text-lg font-serif text-base-content">Sign in</h2>
+          <p className="text-base-content/70 mb-4">
+            Enter your email and password below to log into your account
+          </p>
           <UserAuthForm redirectTo={redirect} />
-        </CardContent>
-        <CardFooter>
-          <p className='text-muted-foreground px-8 text-center text-sm'>
+          <div className="mt-4 text-center text-sm text-base-content/70">
             By clicking sign in, you agree to our{' '}
-            <a
-              href='/terms'
-              className='hover:text-primary underline underline-offset-4'
+            <Link
+              to="/terms"
+              className="text-[rgb(212,175,55)] hover:text-[rgb(212,175,55)]/90 underline underline-offset-4"
             >
               Terms of Service
-            </a>{' '}
+            </Link>{' '}
             and{' '}
-            <a
-              href='/privacy'
-              className='hover:text-primary underline underline-offset-4'
+            <Link
+              to="/privacy"
+              className="text-[rgb(212,175,55)] hover:text-[rgb(212,175,55)]/90 underline underline-offset-4"
             >
               Privacy Policy
-            </a>
+            </Link>
             .
-          </p>
-        </CardFooter>
-      </Card>
+          </div>
+        </div>
+      </div>
     </AuthLayout>
-  )
+  );
 }

@@ -1,14 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./index.html",
-  ],
-  prefix: "",
+	//   content: [
+	//     "./pages/**/*.{ts,tsx}",
+	//     "./components/**/*.{ts,tsx}",
+	//     "./app/**/*.{ts,tsx}",
+	//     "./src/**/*.{ts,tsx}",
+	//     "./index.html",
+	//   ],
+	//   prefix: "",
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
   	container: {
   		center: true,
@@ -71,6 +71,16 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+		fontFamily: {
+  			playfair: [
+  				'Playfair Display',
+  				'serif'
+  			],
+  			inter: [
+  				'Inter',
+  				'sans-serif'
+  			]
+  		},
   		keyframes: {
   			'accordion-down': {
   				from: {
@@ -95,5 +105,9 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require('daisyui'),require("tailwindcss-animate")],
+  daisyui: {
+    themes: ['light', 'dark'],
+  },
+  darkMode: ['class', '[data-theme="dark"]'],
 };
