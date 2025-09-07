@@ -13,13 +13,16 @@ type DataLoaderProps = {
 };
 
 export function DataLoader({ children, path }: DataLoaderProps) {
+  console.log(`[DataLoader] Mounted for path: ${path}`);
   const { isAuthenticated, refreshToken } = useAuth();
   const setLendingStatsData = useSetLendingStatsData();
   const navigate = useNavigate();
 
   const logconfirmAuth = async (token: string) => {
     try {
+      console.log('[DataLoader] Confirming authentication...');
       const result = await confirmAuth(token);
+      console.log('[DataLoader] Auth confirmation result:', result);
       return result;
     } catch (error) {
       console.error('[DataLoader] Error confirming auth:', error);
@@ -37,10 +40,13 @@ export function DataLoader({ children, path }: DataLoaderProps) {
   const handlingLendingStatsData = async (refreshToken: string) => {
     if (!refreshToken) return;
     try {
+      console.log('[DataLoader] Fetching lending stats data...');
       const response = await fetchLendingStatsDetails(refreshToken);
+      console.log('[DataLoader] Fetched lending stats:', response);
       setLendingStatsData(response as LendingStatsData);
       return response;
     } catch (error) {
+      console.error('[DataLoader] Error fetching lending stats:', error);
       toast.error('Failed to fetch lending stats');
       throw error;
     }
@@ -50,27 +56,37 @@ export function DataLoader({ children, path }: DataLoaderProps) {
   const { data: resourceData, isLoading: isLoadingData } = useQuery({
     queryKey: ['route-data', path],
     queryFn: () => {
+      console.log(`[DataLoader] Starting data fetch for path: ${path}`);
       if (path === '/dashboard') {
         return handlingLendingStatsData(refreshToken || '');
       }
       if (path === '/loans') {
+        console.log('[DataLoader] Fetching loans...');
         return fetch('/api/loans').then(res => res.json());
       }
       if (path === '/borrowers') {
+        console.log('[DataLoader] Fetching borrowers...');
         return getProducts();
       }
+      console.log(`[DataLoader] No data fetch configured for path: ${path}`);
       return Promise.resolve(null);
     },
     enabled: !!authResult, // only run after auth passes
   });
 
+  console.log(`[DataLoader] Loading states: isLoadingAuth=${isLoadingAuth}, isLoadingData=${isLoadingData}`);
+  console.log(`[DataLoader] Auth result for enabled flag: !!authResult=${!!authResult}`);
+  console.log(`[DataLoader] Data: authResult=`, authResult, `resourceData=`, resourceData);
+
   // React.useEffect(() => {
-  //   if (!authResult) {
+  //   if (authResult === false) {
+  //     console.log('[DataLoader] Authentication failed, navigating to login.');
   //     navigate('/login', { replace: true });
   //   }
   // }, [authResult, navigate]);
 
   if (isLoadingAuth || isLoadingData) {
+    console.log('[DataLoader] Rendering loading skeleton...');
     return (
       <div className="min-h-screen bg-[rgb(212,175,55)]/20 flex items-center justify-center p-4">
         <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-300 w-full max-w-2xl p-6 space-y-4">
@@ -90,9 +106,11 @@ export function DataLoader({ children, path }: DataLoaderProps) {
   }
 
   if (!isAuthenticated) {
+    console.log('[DataLoader] User not authenticated, navigating to login.');
     return <Navigate to="/login" replace />;
   }
 
+  console.log('[DataLoader] Rendering children.');
   // Optionally, pass loaded data down via React.cloneElement or context
   return <>{children}</>;
 };
