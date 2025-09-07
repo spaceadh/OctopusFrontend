@@ -4,7 +4,7 @@ import { LayoutProvider } from '@/context/layout-provider';
 import { SearchProvider } from '@/context/search-provider';
 import { useAuthStore } from '@/context/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Logo } from '@/assets/logo';
+import Logo  from '@/assets/octopus.jpeg'
 import { ProfileDropdown } from '@/modules/lending/lending-components/profile-dropdown';
 import { CommandMenu } from '@/modules/lending/lending-components/command-menu';
 import { TopNav } from '../lending-components/top-nav';
@@ -95,7 +95,7 @@ export function LendingLayout() {
               <div className="space-y-4 p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Logo className="w-8 h-8" />
+                    <img src={Logo} alt="Octopus Logo" className="h-8 w-8 mr-2" />
                     <span className="font-semibold text-base-content">
                       {isLoading ? <Skeleton className="h-4 w-20" /> : lendingStatsData?.LendingOrgName}
                     </span>

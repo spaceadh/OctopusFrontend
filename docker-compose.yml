@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:80"
-    container_name: my-app-frontend
+    container_name: octopus-frontend
     # In a real development setup, you might want to mount volumes
     # to enable hot-reloading without rebuilding the image.
     # For this scaffold, we use the production build in the container.

@@ -54,6 +54,12 @@ To start the Vite development server, run:
 npm run dev
 ```
 
+To use docker compose file locally ??
+
+```bash
+docker-compose -f docker-compose.dev.yml up
+```
+
 The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
 
 ## Building for Production
