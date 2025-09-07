@@ -16,7 +16,7 @@ export interface LendingStatsData {
 }
 
 interface LendingStoreState {
-  lendingStatsData: LendingStatsData[];
+  lendingStatsData: LendingStatsData | null;
   isLoading: boolean;
   error: string | null;
   lastFetched: number | null;
@@ -29,7 +29,7 @@ interface LendingStoreActions {
 }
 
 const initialState: LendingStoreState = {
-  lendingStatsData: [],
+  lendingStatsData: null,
   isLoading: false,
   error: null,
   lastFetched: null,
@@ -59,7 +59,7 @@ export const useLendingBoundStore = create<LendingStoreState & LendingStoreActio
       ...initialState,
       setLendingStatsData: (data) => {
         set({
-          lendingStatsData: [data],
+          lendingStatsData: data,
           error: null,
           lastFetched: Date.now(),
         });

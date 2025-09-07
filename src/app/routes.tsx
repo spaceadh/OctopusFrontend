@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
             element: <ModuleGuard moduleName="lending" />,
             children: [
               {
-                element: <LendingLayout />,
+                // element: <LendingLayout />,
                 children: lendingRoutes,
               },
             ],

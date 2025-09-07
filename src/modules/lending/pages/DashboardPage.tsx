@@ -85,7 +85,7 @@ export function Dashboard() {
     <div className="min-h-screen bg-[rgb(212,175,55)]/20 p-4 sm:p-6 md:p-8">
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl sm:text-3xl font-bold text-base-content font-serif">Dashboard</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-base-content font-serif">{lendingStatsData?.LendingOrgName}</h1>
           <button className="btn h-10 bg-[rgb(212,175,55)] hover:bg-[rgb(212,175,55)]/90 text-white rounded-xl">
             Download
           </button>
