@@ -1,16 +1,17 @@
-Unexpected Application Error!
-useSidebar must be used within a SidebarProvider.
-Error: useSidebar must be used within a SidebarProvider.
-    at useSidebar (http://localhost:5173/src/components/ui/sidebar.tsx:52:11)
-    at ConfigDrawer (http://localhost:5173/src/modules/lending/lending-components/config-drawer.tsx:48:23)
-    at Object.react_stack_bottom_frame (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3c4820d5:17424:20)
-    at renderWithHooks (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3c4820d5:4206:24)
-    at updateFunctionComponent (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3c4820d5:6619:21)
-    at beginWork (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3c4820d5:7654:20)
-    at runWithFiberInDEV (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3c4820d5:1485:72)
-    at performUnitOfWork (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3c4820d5:10868:98)
-    at workLoopSync (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3c4820d5:10728:43)
-    at renderRootSync (http://localhost:5173/node_modules/.vite/deps/react-dom_client.js?v=3c4820d5:10711:13)
-💿 Hey developer 👋
-
-You can provide a way better UX than this when your app throws errors by providing your own ErrorBoundary or errorElement prop on your route.  
+✗ Build failed in 1.44s
+error during build:
+[vite:css] [postcss] Cannot find module 'daisyui/src/theming/themes'
+Require stack:
+- D:\KillProjects\OctopusFrontend\tailwind.config.js
+file: D:/KillProjects/OctopusFrontend/src/index.css:undefined:NaN
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1249:15)
+    at Function.resolve (node:internal/modules/helpers:148:19)
+    at _resolve (D:\KillProjects\OctopusFrontend\node_modules\jiti\dist\jiti.js:1:246378)
+    at jiti (D:\KillProjects\OctopusFrontend\node_modules\jiti\dist\jiti.js:1:249092)
+    at D:\KillProjects\OctopusFrontend\tailwind.config.js:92:14
+    at evalModule (D:\KillProjects\OctopusFrontend\node_modules\jiti\dist\jiti.js:1:251913)
+    at jiti (D:\KillProjects\OctopusFrontend\node_modules\jiti\dist\jiti.js:1:249841)
+    at D:\KillProjects\OctopusFrontend\node_modules\tailwindcss\lib\lib\load-config.js:52:26
+    at loadConfig (D:\KillProjects\OctopusFrontend\node_modules\tailwindcss\lib\lib\load-config.js:62:6)
+    at getTailwindConfig (D:\KillProjects\OctopusFrontend\node_modules\tailwindcss\lib\lib\setupTrackingContext.js:71:116)
+(base) PS D:\KillProjects\OctopusFrontend> 

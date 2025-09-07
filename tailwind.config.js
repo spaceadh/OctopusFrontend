@@ -1,113 +1,220 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	//   content: [
-	//     "./pages/**/*.{ts,tsx}",
-	//     "./components/**/*.{ts,tsx}",
-	//     "./app/**/*.{ts,tsx}",
-	//     "./src/**/*.{ts,tsx}",
-	//     "./index.html",
-	//   ],
-	//   prefix: "",
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-  	container: {
-  		center: true,
-  		padding: '2rem',
-  		screens: {
-  			'2xl': '1400px'
-  		}
-  	},
-  	extend: {
-  		colors: {
-  			border: 'hsl(var(--border) / <alpha-value>)',
-  			input: 'hsl(var(--input) / <alpha-value>)',
-  			ring: 'hsl(var(--ring) / <alpha-value>)',
-  			background: 'hsl(var(--background) / <alpha-value>)',
-  			foreground: 'hsl(var(--foreground) / <alpha-value>)',
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
-  				foreground: 'hsl(var(--primary-foreground) / <alpha-value>)'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary) / <alpha-value>)',
-  				foreground: 'hsl(var(--secondary-foreground) / <alpha-value>)'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
-  				foreground: 'hsl(var(--accent-foreground) / <alpha-value>)'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--status-error) / <alpha-value>)',
-  				foreground: 'hsl(var(--foreground) / <alpha-value>)'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
-  				foreground: 'hsl(var(--muted-foreground) / <alpha-value>)'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
-  				foreground: 'hsl(var(--popover-foreground) / <alpha-value>)'
-  			},
-  			card: {
-  				DEFAULT: 'hsl(var(--card) / <alpha-value>)',
-  				foreground: 'hsl(var(--card-foreground) / <alpha-value>)'
-  			},
-  			success: 'hsl(var(--status-success) / <alpha-value>)',
-  			warning: 'hsl(var(--status-warning) / <alpha-value>)',
-  			info: 'hsl(var(--status-info) / <alpha-value>)',
-  			sidebar: {
-  				DEFAULT: 'hsl(var(--sidebar-background))',
-  				foreground: 'hsl(var(--sidebar-foreground))',
-  				primary: 'hsl(var(--sidebar-primary))',
-  				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-  				accent: 'hsl(var(--sidebar-accent))',
-  				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-  				border: 'hsl(var(--sidebar-border))',
-  				ring: 'hsl(var(--sidebar-ring))'
-  			}
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		},
-		fontFamily: {
-  			playfair: [
-  				'Playfair Display',
-  				'serif'
-  			],
-  			inter: [
-  				'Inter',
-  				'sans-serif'
-  			]
-  		},
-  		keyframes: {
-  			'accordion-down': {
-  				from: {
-  					height: '0'
-  				},
-  				to: {
-  					height: 'var(--radix-accordion-content-height)'
-  				}
-  			},
-  			'accordion-up': {
-  				from: {
-  					height: 'var(--radix-accordion-content-height)'
-  				},
-  				to: {
-  					height: '0'
-  				}
-  			}
-  		},
-  		animation: {
-  			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
-  	}
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
+    extend: {
+      colors: {
+        border: 'hsl(var(--border) / <alpha-value>)',
+        input: 'hsl(var(--input) / <alpha-value>)',
+        ring: 'hsl(var(--ring) / <alpha-value>)',
+        background: 'hsl(var(--background) / <alpha-value>)',
+        foreground: 'hsl(var(--foreground) / <alpha-value>)',
+        primary: {
+          DEFAULT: 'hsl(var(--primary) / <alpha-value>)',
+          foreground: 'hsl(var(--primary-foreground) / <alpha-value>)',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary) / <alpha-value>)',
+          foreground: 'hsl(var(--secondary-foreground) / <alpha-value>)',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
+          foreground: 'hsl(var(--accent-foreground) / <alpha-value>)',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive) / <alpha-value>)',
+          foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted) / <alpha-value>)',
+          foreground: 'hsl(var(--muted-foreground) / <alpha-value>)',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover) / <alpha-value>)',
+          foreground: 'hsl(var(--popover-foreground) / <alpha-value>)',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card) / <alpha-value>)',
+          foreground: 'hsl(var(--card-foreground) / <alpha-value>)',
+        },
+        success: 'hsl(var(--status-success) / <alpha-value>)',
+        warning: 'hsl(var(--status-warning) / <alpha-value>)',
+        info: 'hsl(var(--status-info) / <alpha-value>)',
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar-background) / <alpha-value>)',
+          foreground: 'hsl(var(--sidebar-foreground) / <alpha-value>)',
+          primary: 'hsl(var(--sidebar-primary) / <alpha-value>)',
+          'primary-foreground': 'hsl(var(--sidebar-primary-foreground) / <alpha-value>)',
+          accent: 'hsl(var(--sidebar-accent) / <alpha-value>)',
+          'accent-foreground': 'hsl(var(--sidebar-accent-foreground) / <alpha-value>)',
+          border: 'hsl(var(--sidebar-border) / <alpha-value>)',
+          ring: 'hsl(var(--sidebar-ring) / <alpha-value>)',
+        },
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      fontFamily: {
+        playfair: ['Playfair Display', 'serif'],
+        inter: ['Inter', 'sans-serif'],
+        manrope: ['Manrope', 'sans-serif'],
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+    },
   },
-  plugins: [require('daisyui'),require("tailwindcss-animate")],
+  plugins: [require('daisyui'), require('tailwindcss-animate')],
   daisyui: {
-    themes: ['light', 'dark'],
+    themes: [
+      {
+        light: {
+          primary: 'hsl(var(--primary))',
+          'primary-foreground': 'hsl(var(--primary-foreground))',
+          secondary: 'hsl(var(--secondary))',
+          'secondary-foreground': 'hsl(var(--secondary-foreground))',
+          accent: 'hsl(var(--accent))',
+          'accent-foreground': 'hsl(var(--accent-foreground))',
+          neutral: 'hsl(var(--muted))',
+          'neutral-foreground': 'hsl(var(--muted-foreground))',
+          'base-100': 'hsl(var(--background))',
+          'base-200': 'hsl(var(--card))',
+          'base-content': 'hsl(var(--foreground))',
+          destructive: 'hsl(var(--destructive))',
+          'destructive-foreground': 'hsl(var(--destructive-foreground))',
+          border: 'hsl(var(--border))',
+          info: 'hsl(var(--status-info))',
+          success: 'hsl(var(--status-success))',
+          warning: 'hsl(var(--status-warning))',
+        },
+      },
+      {
+        dark: {
+          primary: 'hsl(var(--primary))',
+          'primary-foreground': 'hsl(var(--primary-foreground))',
+          secondary: 'hsl(var(--secondary))',
+          'secondary-foreground': 'hsl(var(--secondary-foreground))',
+          accent: 'hsl(var(--accent))',
+          'accent-foreground': 'hsl(var(--accent-foreground))',
+          neutral: 'hsl(var(--muted))',
+          'neutral-foreground': 'hsl(var(--muted-foreground))',
+          'base-100': 'hsl(var(--background))',
+          'base-200': 'hsl(var(--card))',
+          'base-content': 'hsl(var(--foreground))',
+          destructive: 'hsl(var(--destructive))',
+          'destructive-foreground': 'hsl(var(--destructive-foreground))',
+          border: 'hsl(var(--border))',
+          info: 'hsl(var(--status-info))',
+          success: 'hsl(var(--status-success))',
+          warning: 'hsl(var(--status-warning))',
+        },
+      },
+      {
+        'module-lending': {
+          primary: '#FFB703',
+          'primary-foreground': 'hsl(var(--primary-foreground))',
+          secondary: 'hsl(var(--secondary))',
+          'secondary-foreground': 'hsl(var(--secondary-foreground))',
+          accent: '#FFB703',
+          'accent-foreground': 'hsl(var(--accent-foreground))',
+          neutral: 'hsl(var(--muted))',
+          'neutral-foreground': 'hsl(var(--muted-foreground))',
+          'base-100': 'hsl(var(--background))',
+          'base-200': 'hsl(var(--card))',
+          'base-content': 'hsl(var(--foreground))',
+          destructive: 'hsl(var(--destructive))',
+          'destructive-foreground': 'hsl(var(--destructive-foreground))',
+          border: 'hsl(var(--border))',
+          info: 'hsl(var(--status-info))',
+          success: 'hsl(var(--status-success))',
+          warning: 'hsl(var(--status-warning))',
+        },
+      },
+      {
+        'module-property': {
+          primary: '#2D6A4F',
+          'primary-foreground': 'hsl(var(--primary-foreground))',
+          secondary: 'hsl(var(--secondary))',
+          'secondary-foreground': 'hsl(var(--secondary-foreground))',
+          accent: '#2D6A4F',
+          'accent-foreground': 'hsl(var(--accent-foreground))',
+          neutral: 'hsl(var(--muted))',
+          'neutral-foreground': 'hsl(var(--muted-foreground))',
+          'base-100': 'hsl(var(--background))',
+          'base-200': 'hsl(var(--card))',
+          'base-content': 'hsl(var(--foreground))',
+          destructive: 'hsl(var(--destructive))',
+          'destructive-foreground': 'hsl(var(--destructive-foreground))',
+          border: 'hsl(var(--border))',
+          info: 'hsl(var(--status-info))',
+          success: 'hsl(var(--status-success))',
+          warning: 'hsl(var(--status-warning))',
+        },
+      },
+      {
+        'module-sacco': {
+          primary: '#6A4C93',
+          'primary-foreground': 'hsl(var(--primary-foreground))',
+          secondary: 'hsl(var(--secondary))',
+          'secondary-foreground': 'hsl(var(--secondary-foreground))',
+          accent: '#6A4C93',
+          'accent-foreground': 'hsl(var(--accent-foreground))',
+          neutral: 'hsl(var(--muted))',
+          'neutral-foreground': 'hsl(var(--muted-foreground))',
+          'base-100': 'hsl(var(--background))',
+          'base-200': 'hsl(var(--card))',
+          'base-content': 'hsl(var(--foreground))',
+          destructive: 'hsl(var(--destructive))',
+          'destructive-foreground': 'hsl(var(--destructive-foreground))',
+          border: 'hsl(var(--border))',
+          info: 'hsl(var(--status-info))',
+          success: 'hsl(var(--status-success))',
+          warning: 'hsl(var(--status-warning))',
+        },
+      },
+      {
+        'module-chama': {
+          primary: '#E63946',
+          'primary-foreground': 'hsl(var(--primary-foreground))',
+          secondary: 'hsl(var(--secondary))',
+          'secondary-foreground': 'hsl(var(--secondary-foreground))',
+          accent: '#E63946',
+          'accent-foreground': 'hsl(var(--accent-foreground))',
+          neutral: 'hsl(var(--muted))',
+          'neutral-foreground': 'hsl(var(--muted-foreground))',
+          'base-100': 'hsl(var(--background))',
+          'base-200': 'hsl(var(--card))',
+          'base-content': 'hsl(var(--foreground))',
+          destructive: 'hsl(var(--destructive))',
+          'destructive-foreground': 'hsl(var(--destructive-foreground))',
+          border: 'hsl(var(--border))',
+          info: 'hsl(var(--status-info))',
+          success: 'hsl(var(--status-success))',
+          warning: 'hsl(var(--status-warning))',
+        },
+      },
+    ],
+    darkTheme: 'dark',
   },
   darkMode: ['class', '[data-theme="dark"]'],
 };
