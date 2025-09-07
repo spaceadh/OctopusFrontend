@@ -112,3 +112,133 @@
     font-family: var(--font-inter);
   }
 }
+
+/* Module-Chama specific styles */
+[data-theme="module-chama"] {
+  --primary: 230 61% 70%; /* Equivalent to #E63946 in HSL */
+  --primary-foreground: 0 0% 100%;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 10%;
+  --card: 0 0% 98%;
+  --card-foreground: 0 0% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 10%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 20%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 230 61% 90%;
+  --accent-foreground: 230 61% 30%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 92%;
+  --input: 0 0% 92%;
+  --ring: 230 61% 70%;
+  --radius: 0.5rem;
+}
+
+[data-theme="module-chama"].dark {
+  --primary: 230 61% 60%;
+  --primary-foreground: 0 0% 100%;
+  --background: 0 0% 10%;
+  --foreground: 0 0% 90%;
+  --card: 0 0% 15%;
+  --card-foreground: 0 0% 90%;
+  --popover: 0 0% 15%;
+  --popover-foreground: 0 0% 90%;
+  --secondary: 0 0% 20%;
+  --secondary-foreground: 0 0% 90%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 65%;
+  --accent: 230 61% 25%;
+  --accent-foreground: 230 61% 90%;
+  --destructive: 0 84% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 25%;
+  --input: 0 0% 25%;
+  --ring: 230 61% 60%;
+}
+
+/* Custom styles for Chama module */
+.chama-primary-bg {
+  background-color: hsl(var(--primary));
+}
+
+.chama-primary-text {
+  color: hsl(var(--primary));
+}
+
+.chama-border {
+  border-color: hsl(var(--primary) / 0.5);
+}
+
+/* Module-Auth specific styles */
+[data-theme="module-auth"] {
+  --primary: 42 100% 51%; /* Equivalent to #FFB703 in HSL */
+  --primary-foreground: 0 0% 100%;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 10%;
+  --card: 0 0% 98%;
+  --card-foreground: 0 0% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 10%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 20%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --accent: 42 100% 90%;
+  --accent-foreground: 42 100% 30%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 92%;
+  --input: 0 0% 92%;
+  --ring: 42 100% 51%;
+  --radius: 0.5rem;
+}
+
+[data-theme="module-auth"].dark {
+  --primary: 42 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --background: 0 0% 10%;
+  --foreground: 0 0% 90%;
+  --card: 0 0% 15%;
+  --card-foreground: 0 0% 90%;
+  --popover: 0 0% 15%;
+  --popover-foreground: 0 0% 90%;
+  --secondary: 0 0% 20%;
+  --secondary-foreground: 0 0% 90%;
+  --muted: 0 0% 20%;
+  --muted-foreground: 0 0% 65%;
+  --accent: 42 100% 25%;
+  --accent-foreground: 42 100% 90%;
+  --destructive: 0 84% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 25%;
+  --input: 0 0% 25%;
+  --ring: 42 100% 50%;
+}
+
+/* Custom styles for Auth module */
+.auth-primary-bg {
+  background-color: hsl(var(--primary));
+}
+
+.auth-primary-text {
+  color: hsl(var(--primary));
+}
+
+.auth-border {
+  border-color: hsl(var(--primary) / 0.5);
+}
+
+/* Custom button styles for auth theme */
+.btn-auth {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-color: hsl(var(--primary));
+}
+
+.btn-auth:hover {
+  background-color: hsl(var(--primary) / 0.9);
+  border-color: hsl(var(--primary) / 0.9);
+}

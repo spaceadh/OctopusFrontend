@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '@/modules/auth/apis/products';
 import toast from 'react-hot-toast';
+import { useTheme } from '@/context/theme-provider';
 
 type Product = {
   id: string;
@@ -14,6 +15,7 @@ type Product = {
 
 const CheckInPage = () => {
   const navigate = useNavigate();
+  const { setTheme } = useTheme();
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   const { data: products, isLoading, error } = useQuery<Product[], Error>({
@@ -23,16 +25,16 @@ const CheckInPage = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[rgb(212,175,55)]/20">
-        <div className="loading loading-spinner text-[rgb(212,175,55)]"></div>
+      <div className="flex justify-center items-center min-h-screen bg-base-100">
+        <div className="loading loading-spinner text-primary"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-[rgb(212,175,55)]/20">
-        <div className="text-red-600 text-center">Error fetching products: {error.message}</div>
+      <div className="flex justify-center items-center min-h-screen bg-base-100">
+        <div className="text-error text-center">Error fetching products: {error.message}</div>
       </div>
     );
   }
@@ -45,12 +47,27 @@ const CheckInPage = () => {
     // Here you would typically call a mutation to update the subscription status
   };
 
-  return (
-    <div className="min-h-screen bg-[rgb(212,175,55)]/20">
-      <div className="container mx-auto p-4 sm:p-6 md:p-8">
-        <h1 className="text-2xl sm:text-3xl font-bold text-base-content mb-4 sm:mb-6 font-serif">Check-In</h1>
+  const themeMap: { [key: string]: string } = {
+    auth: 'module-auth',
+    lending: 'module-lending',
+    properties: 'module-properties',
+    sacco: 'module-sacco',
+    chama: 'module-chama',
+  };
 
-        <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-200">
+  const handleProductSwitch = (product: Product) => {
+    if (product.redirect) {
+      toast.loading(`Loading ${(product.name).toUpperCase()} product...`, { duration: 1000 });
+      navigate(product.redirect);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-base-100">
+      <div className="container mx-auto p-4 sm:p-6 md:p-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-base-content mb-4 sm:mb-6 font-playfair">Check-In</h1>
+
+        <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-300">
           <div className="card-body">
             <h2 className="card-title text-xl sm:text-2xl text-base-content">Your Subscribed Products</h2>
             <p className="text-base-content/70 mb-4">Products you are currently subscribed to.</p>
@@ -59,7 +76,7 @@ const CheckInPage = () => {
                 <div
                   key={product.id}
                   className="card bg-base-100 rounded-xl border border-base-300 hover:shadow-md transition-shadow cursor-pointer"
-                  onClick={() => product.redirect && navigate(product.redirect)}
+                  onClick={() => product.redirect && handleProductSwitch(product)}
                 >
                   <div className="card-body">
                     <h3 className="text-lg sm:text-xl font-medium text-base-content">{product.name}</h3>
@@ -72,7 +89,7 @@ const CheckInPage = () => {
         </div>
 
         <div className="mt-6 sm:mt-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-base-content mb-4 font-serif">Discover Other Products</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-base-content mb-4 font-playfair">Discover Other Products</h2>
           <div className="space-y-2">
             {availableProducts.map((product) => (
               <div key={product.id} className="collapse collapse-arrow bg-base-200 rounded-xl border border-base-300">
@@ -87,7 +104,7 @@ const CheckInPage = () => {
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                     <p className="text-sm sm:text-base text-base-content/70">{product.description}</p>
                     <button
-                      className="btn h-12 bg-[rgb(212,175,55)] hover:bg-[rgb(212,175,55)]/90 text-white rounded-xl font-medium transition-all duration-200 w-full sm:w-auto"
+                      className="btn h-12 btn-primary rounded-xl font-medium transition-all duration-200 w-full sm:w-auto"
                       onClick={() => handleSubscribe(product.name)}
                     >
                       Subscribe

@@ -10,6 +10,7 @@ import { FaDiscord } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/context/authStore';
 import { sleep } from '@/lib/utils';
+import { useTheme } from '@/context/theme-provider';
 
 // Define validation schema with Zod
 const formSchema = z.object({
@@ -37,6 +38,7 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setUser, setAccessToken, setRefreshToken } = useAuthStore();
+  const { setTheme } = useTheme();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,7 +70,9 @@ export function UserAuthForm({ className, redirectTo, ...props }: UserAuthFormPr
         setIsLoading(false);
         setUser(mockUser);
         setAccessToken('mock-access-token');
-        const targetPath = redirectTo || '/';
+        setRefreshToken('mock-refresh-token');
+        setTheme('module-auth'); // Set theme to auth module on login
+        const targetPath = redirectTo || '/check-in';
         navigate(targetPath, { replace: true });
         return `Welcome back, ${data.email}!`;
       },

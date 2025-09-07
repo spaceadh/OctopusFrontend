@@ -36,7 +36,7 @@ export function ModuleGuard({ moduleName }: ModuleGuardProps) {
   const hasSubscription = user.subscriptions?.includes(moduleName);
 
   if (!hasSubscription) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/check-in" replace />;
   }
 
   return <Outlet />;

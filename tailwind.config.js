@@ -130,6 +130,27 @@ export default {
         },
       },
       {
+        'module-auth': {
+          primary: '#FFB703',
+          'primary-foreground': 'hsl(var(--primary-foreground))',
+          secondary: 'hsl(var(--secondary))',
+          'secondary-foreground': 'hsl(var(--secondary-foreground))',
+          accent: '#FFB703',
+          'accent-foreground': 'hsl(var(--accent-foreground))',
+          neutral: 'hsl(var(--muted))',
+          'neutral-foreground': 'hsl(var(--muted-foreground))',
+          'base-100': 'hsl(var(--background))',
+          'base-200': 'hsl(var(--card))',
+          'base-content': 'hsl(var(--foreground))',
+          destructive: 'hsl(var(--destructive))',
+          'destructive-foreground': 'hsl(var(--destructive-foreground))',
+          border: 'hsl(var(--border))',
+          info: 'hsl(var(--status-info))',
+          success: 'hsl(var(--status-success))',
+          warning: 'hsl(var(--status-warning))',
+        },
+      },
+      {
         'module-lending': {
           primary: '#FFB703',
           'primary-foreground': 'hsl(var(--primary-foreground))',

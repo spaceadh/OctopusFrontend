@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
     path: '/',
     children: [
       {
-        path: '/',
+        path: 'check-in',
         element: <CheckInLayout />,
         children: [
           {
