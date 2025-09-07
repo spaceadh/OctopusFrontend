@@ -13,9 +13,9 @@ export const lendingRoutes: RouteObject[] = [
       {
         index: true,
         element: (
-          // <DataLoader path="/dashboard">
+          <DataLoader path="/dashboard">
             <Dashboard />
-          // </DataLoader>
+          </DataLoader>
         ),
       },
       {

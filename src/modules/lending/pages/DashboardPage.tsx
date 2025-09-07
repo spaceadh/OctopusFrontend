@@ -1,99 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useAuthStore } from '@/context/authStore';
 import { useLendingBoundStore } from '@/modules/lending/context/lending-store';
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { RecentSales } from '@/modules/lending/pages/dashboard/components/recent-sales';
 import { Overview } from '@/modules/lending/pages/dashboard/components/overview';
-import { t } from 'i18next';
 
-export async function Dashboard() {
-  console.log('Dashboard mounted');
-  const { user , refreshToken} = useAuthStore();
-  const { lendingStatsData, error, fetchLendingStats } = useLendingBoundStore();
-  const [loading, setLoading] = useState(false);
+export function Dashboard() {
+  const { lendingStatsData } = useLendingBoundStore();
   const [activeTab, setActiveTab] = useState('overview');
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
-  // use effect to redirect if no user
-  if (user) {
-    // await fetchLendingStats(refreshToken || '');
-    setLoading(true);
-  }
-
-  console.log('Lending Stats Data:', lendingStatsData);
-  console.log('Error:', loading, error);
-
-  if (!lendingStatsData || loading) {
-    return (
-      <div className="min-h-screen bg-[rgb(212,175,55)]/20 p-4 sm:p-6 md:p-8">
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Skeleton className="h-8 w-48 bg-[rgb(212,175,55)]/30 animate-pulse rounded-xl" />
-            <Skeleton className="h-10 w-32 bg-[rgb(212,175,55)]/30 animate-pulse rounded-xl" />
-          </div>
-          <div className="tabs tabs-boxed bg-base-200 rounded-xl p-1">
-            <Skeleton className="tab h-8 w-24 bg-[rgb(212,175,55)]/30 animate-pulse rounded-xl" />
-            <Skeleton className="tab h-8 w-24 bg-[rgb(212,175,55)]/30 animate-pulse rounded-xl" />
-            <Skeleton className="tab h-8 w-24 bg-[rgb(212,175,55)]/30 animate-pulse rounded-xl" />
-            <Skeleton className="tab h-8 w-24 bg-[rgb(212,175,55)]/30 animate-pulse rounded-xl" />
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="card bg-base-200 rounded-2xl shadow-sm border border-base-300">
-                <div className="card-body space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Skeleton className="h-4 w-24 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                    <Skeleton className="h-4 w-4 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                  </div>
-                  <Skeleton className="h-8 w-32 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                  <Skeleton className="h-3 w-48 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="grid gap-4 grid-cols-1 lg:grid-cols-7">
-            <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-300 col-span-1 lg:col-span-4">
-              <div className="card-body">
-                <Skeleton className="h-6 w-32 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                <Skeleton className="h-64 w-full bg-[rgb(212,175,55)]/30 animate-pulse" />
-              </div>
-            </div>
-            <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-300 col-span-1 lg:col-span-3">
-              <div className="card-body space-y-2">
-                <Skeleton className="h-6 w-32 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                <Skeleton className="h-4 w-48 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="flex items-center gap-4">
-                    <Skeleton className="h-9 w-9 rounded-full bg-[rgb(212,175,55)]/30 animate-pulse" />
-                    <div className="flex-1 space-y-2">
-                      <Skeleton className="h-4 w-24 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                      <Skeleton className="h-3 w-36 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                    </div>
-                    <Skeleton className="h-4 w-20 bg-[rgb(212,175,55)]/30 animate-pulse" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-[rgb(212,175,55)]/20 flex items-center justify-center p-4">
-        <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-300 p-6">
-          <h3 className="text-lg font-medium text-base-content">Error</h3>
-          <p className="text-base-content/70">{error}</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[rgb(212,175,55)]/20 p-4 sm:p-6 md:p-8">

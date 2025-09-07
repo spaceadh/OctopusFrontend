@@ -13,7 +13,6 @@ type DataLoaderProps = {
 };
 
 export function DataLoader({ children, path }: DataLoaderProps) {
-  console.log('DataLoader mounted with path:', path);
   const { isAuthenticated, refreshToken } = useAuth();
   const setLendingStatsData = useSetLendingStatsData();
   const navigate = useNavigate();
@@ -21,16 +20,17 @@ export function DataLoader({ children, path }: DataLoaderProps) {
   const logconfirmAuth = async (token: string) => {
     try {
       const result = await confirmAuth(token);
-      console.log('Auth confirmation result:', result);
+      return result;
     } catch (error) {
-      console.error('Error confirming auth:', error);
+      console.error('[DataLoader] Error confirming auth:', error);
+      throw error;
     }
   };
 
   // 1. Auth check
   const { data: authResult, isLoading: isLoadingAuth } = useQuery({
     queryKey: ['auth-check', refreshToken],
-    queryFn: () => logconfirmAuth(refreshToken),
+    queryFn: () => logconfirmAuth(refreshToken || ''),
     retry: false,
   });
 
@@ -38,11 +38,11 @@ export function DataLoader({ children, path }: DataLoaderProps) {
     if (!refreshToken) return;
     try {
       const response = await fetchLendingStatsDetails(refreshToken);
-      console.log('Fetched lending stats:', response);
       setLendingStatsData(response as LendingStatsData);
+      return response;
     } catch (error) {
-      console.error('Error fetching lending stats:', error);
       toast.error('Failed to fetch lending stats');
+      throw error;
     }
   };
 
@@ -51,9 +51,7 @@ export function DataLoader({ children, path }: DataLoaderProps) {
     queryKey: ['route-data', path],
     queryFn: () => {
       if (path === '/dashboard') {
-        const response = handlingLendingStatsData(refreshToken || '');
-        console.log('Lending stats response:', response);
-        return response;
+        return handlingLendingStatsData(refreshToken || '');
       }
       if (path === '/loans') {
         return fetch('/api/loans').then(res => res.json());
@@ -66,11 +64,11 @@ export function DataLoader({ children, path }: DataLoaderProps) {
     enabled: !!authResult, // only run after auth passes
   });
 
-  React.useEffect(() => {
-    if (authResult && !authResult) {
-      navigate('/login', { replace: true });
-    }
-  }, [authResult, navigate]);
+  // React.useEffect(() => {
+  //   if (!authResult) {
+  //     navigate('/login', { replace: true });
+  //   }
+  // }, [authResult, navigate]);
 
   if (isLoadingAuth || isLoadingData) {
     return (
@@ -95,6 +93,7 @@ export function DataLoader({ children, path }: DataLoaderProps) {
     return <Navigate to="/login" replace />;
   }
 
+  console.log('[DataLoader] Rendering children.');
   // Optionally, pass loaded data down via React.cloneElement or context
-  return children;
+  return <>{children}</>;
 };
