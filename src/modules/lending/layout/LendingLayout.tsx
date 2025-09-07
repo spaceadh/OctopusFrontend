@@ -1,11 +1,8 @@
-import { Outlet } from 'react-router-dom'
+import React from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { LayoutProvider } from '@/context/layout-provider'
 import { SearchProvider } from '@/context/search-provider'
-import {
-  Sidebar,
-  SidebarProvider,
-  SidebarInset,
-} from '@/components/ui/sidebar'
+import { Sidebar,SidebarProvider,SidebarInset,} from '@/components/ui/sidebar'
 import { Header } from '../lending-components/header'
 import { Main } from '../lending-components/main'
 import { TopNav } from '../lending-components/top-nav'
@@ -13,135 +10,135 @@ import { ProfileDropdown } from '../lending-components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { ConfigDrawer } from '../lending-components/config-drawer'
-import {
-  BellIcon,
-  HomeIcon,
-  LineChartIcon,
-  Package2Icon,
-  PackageIcon,
-  SettingsIcon,
-  UsersIcon,
-} from 'lucide-react'
+import {Bell, BellIcon,HomeIcon,Package2Icon,PackageIcon,Settings,SettingsIcon,UsersIcon, Link,} from 'lucide-react'
 import { SidebarMenu, SidebarMenuButton } from '@/components/ui/sidebar'
 import { useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import React from 'react'
+import { sidebarData } from '@/modules/lending/pages/dashboard/sidebar-data'
+import { CommandMenu } from '../lending-components/command-menu'
+import { Logo } from '@/assets/logo'
+import { useAuthStore } from '@/context/authStore'
 
-const topNav = [
-  {
-    title: 'Overview',
-    href: '/app/lending',
-    isActive: true,
-  },
-  {
-    title: 'Customers',
-    href: '#',
+// TopNav derived from sidebarData
+const topNav = sidebarData.productMenus
+  .flatMap((group) =>
+    group.items.flatMap((item) =>
+      'url' in item
+        ? [item]
+        : ('items' in item && Array.isArray(item.items))
+        ? item.items.filter((subItem) => 'url' in subItem)
+        : []
+    )
+  )
+  .map((item) => ({
+    title: item.title,
+    href: item.url!,
     isActive: false,
-  },
-  {
-    title: 'Products',
-    href: '#',
-    isActive: false,
-  },
-  {
-    title: 'Settings',
-    href: '#',
-    isActive: false,
-  },
-];
+  }));
+
+
 
 export function LendingLayout() {
   const location = useLocation();
-  const getIsActive = (path: string) => location.pathname === path;
+  const navigate = useNavigate();
+  const { user } = useAuthStore();
+
+  const updatedTopNav = topNav.map((link) => ({
+    ...link,
+    isActive: location.pathname === link.href,
+  }));
+
   return (
     <LayoutProvider>
       <SearchProvider>
-        <SidebarProvider>
-          <Sidebar>
-            <div
-              className="flex h-full flex-col justify-between"
-              data-testid="sidebar-scroll-container"
-            >
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-2 p-4">
-                  <Package2Icon className="h-6 w-6" />
-                  <span className="font-semibold">Lending Co</span>
-                </div>
-                <SidebarMenu>
-                  <SidebarMenuButton
-                    href="/app/lending"
-                    isActive={getIsActive('/app/lending')}
-                    icon={<HomeIcon />}
-                  >
-                    Dashboard
-                  </SidebarMenuButton>
-                  <SidebarMenuButton
-                    href="/app/lending/loans"
-                    isActive={getIsActive('/app/lending/loans')}
-                    icon={<UsersIcon />}
-                  >
-                    Loans
-                  </SidebarMenuButton>
-                  <SidebarMenuButton
-                    href="/app/lending/borrowers"
-                    isActive={getIsActive('/app/lending/borrowers')}
-                    icon={<PackageIcon />}
-                  >
-                    Borrowers
-                  </SidebarMenuButton>
-                  <SidebarMenuButton href="#" icon={<LineChartIcon />}>
-                    Analytics
-                  </SidebarMenuButton>
-                </SidebarMenu>
+        <div className="min-h-screen bg-[rgb(212,175,55)]/20 flex">
+          {/* Sidebar */}
+          <aside className="bg-base-200 w-64 p-4 flex flex-col justify-between border-r border-base-300">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 p-2">
+                <Logo className="w-8 h-8" />
+                <span className="font-semibold text-base-content">Lending Co</span>
               </div>
-              <div className="flex flex-col gap-4 p-4">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <SidebarMenuButton
-                      icon={<SettingsIcon />}
-                      className="mt-auto"
-                    >
-                      Settings
-                    </SidebarMenuButton>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Settings</DialogTitle>
-                    </DialogHeader>
-                    <div className="py-4">
-                      <p>This is the settings dialog.</p>
+              <nav className="space-y-2">
+                {sidebarData.productMenus.map((group) =>
+                  group.items.map((item, index) => (
+                    <div key={`${group.title}-${index}`}>
+                      {'url' in item ? (
+                        <Link
+                          to={item.url}
+                          className={`btn btn-ghost w-full justify-start h-12 rounded-xl ${
+                            location.pathname === item.url
+                              ? 'bg-[rgb(212,175,55)]/20 text-[rgb(212,175,55)]'
+                              : 'text-base-content hover:bg-base-300'
+                          }`}
+                        >
+                          <item.icon className="h-5 w-5" />
+                          {item.title}
+                        </Link>
+                      ) : (
+                        <div className="collapse collapse-arrow">
+                          <input
+                            type="checkbox"
+                            className="peer"
+                            defaultChecked={item.items?.some((subItem) => subItem.url === location.pathname)}
+                          />
+                          <div className="collapse-title flex items-center gap-2 text-base-content font-medium">
+                            <item.icon className="h-5 w-5" />
+                            {item.title}
+                          </div>
+                          <div className="collapse-content space-y-2 pl-4">
+                            {item.items?.map((subItem) => (
+                              <Link
+                                key={subItem.url}
+                                to={subItem.url}
+                                className={`btn btn-ghost w-full justify-start h-10 rounded-xl ${
+                                  location.pathname === subItem.url
+                                    ? 'bg-[rgb(212,175,55)]/20 text-[rgb(212,175,55)]'
+                                    : 'text-base-content hover:bg-base-300'
+                                }`}
+                              >
+                                <subItem.icon className="h-4 w-4" />
+                                {subItem.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
+                  ))
+                )}
+              </nav>
             </div>
-          </Sidebar>
-          <SidebarInset>
-            <Header>
-              <TopNav links={topNav} />
-              <div className="ms-auto flex items-center gap-2">
-                <Search />
+            <div className="p-2">
+              <button
+                className="btn btn-ghost w-full justify-start h-12 rounded-xl text-base-content hover:bg-base-300"
+                onClick={() => navigate('/settings')}
+              >
+                <Settings className="h-5 w-5" />
+                Settings
+              </button>
+            </div>
+          </aside>
+          {/* Main Content */}
+          <div className="flex-1 flex flex-col">
+            <header className="bg-base-200 border-b border-base-300 p-4 flex items-center justify-between">
+              <TopNav links={updatedTopNav} />
+              <div className="flex items-center gap-2">
+                <CommandMenu />
                 <ThemeSwitch />
                 <ConfigDrawer />
-                <Button variant="outline" size="icon" className="h-8 w-8">
-                  <BellIcon className="h-4 w-4" />
+                <button className="btn btn-ghost btn-circle h-8 w-8">
+                  <Bell className="h-4 w-4 text-base-content" />
                   <span className="sr-only">Toggle notifications</span>
-                </Button>
+                </button>
                 <ProfileDropdown />
               </div>
-            </Header>
-            <Main>
+            </header>
+            <Main className="flex-1 p-4 sm:p-6 md:p-8">
               <Outlet />
             </Main>
-          </SidebarInset>
-        </SidebarProvider>
+          </div>
+        </div>
       </SearchProvider>
     </LayoutProvider>
   );

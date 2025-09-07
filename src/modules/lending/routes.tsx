@@ -1,22 +1,22 @@
-import { RouteObject, Outlet, Navigate } from 'react-router-dom'
-import { Dashboard } from './pages/DashboardPage'
-import LoansListPage from './pages/LoansListPage'
-import BorrowersListPage from './pages/BorrowersListPage'
-import { useAuth } from '@/context/authStore';
-import { Skeleton } from '@/components/ui/skeleton';
-import React from 'react';
-import DataLoader  from '@/modules/lending/context/DataLoader';
+// Routing configuration
+import { RouteObject, Outlet } from 'react-router-dom';
+import { Dashboard } from './pages/DashboardPage';
+import LoansListPage from './pages/LoansListPage';
+import BorrowersListPage from '@/modules/lending/pages/BorrowersListPage';
+import { DataLoader } from '@/modules/lending/context/DataLoader';
 
-const lendingRoutes: RouteObject[] = [
+export const lendingRoutes: RouteObject[] = [
   {
     path: 'lending',
     element: <Outlet />,
     children: [
       {
         index: true,
-        element: <DataLoader path="/dashboard">
-          <Dashboard />
-        </DataLoader>,
+        element: (
+          <DataLoader path="/dashboard">
+            <Dashboard />
+          </DataLoader>
+        ),
       },
       {
         path: 'loans',
@@ -36,6 +36,6 @@ const lendingRoutes: RouteObject[] = [
       },
     ],
   },
-]
+];
 
-export default lendingRoutes
+export default lendingRoutes;

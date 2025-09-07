@@ -8,13 +8,13 @@ export function Overview() {
         <BarChart data={data}>
           <XAxis
             dataKey="name"
-            stroke="hsl(var(--base-content) / 0.5)"
+            stroke="#ffffff"
             fontSize={12}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
-            stroke="hsl(var(--base-content) / 0.5)"
+            stroke="#ffffff"
             fontSize={12}
             tickLine={false}
             axisLine={false}
@@ -22,7 +22,7 @@ export function Overview() {
           />
           <Bar
             dataKey="total"
-            fill="hsl(var(--primary))"
+            fill="hsl(var(--text-base-content))"
             radius={[4, 4, 0, 0]}
             className="fill-[rgb(212,175,55)]"
           />

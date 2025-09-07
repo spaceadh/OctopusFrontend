@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Navigate, data } from 'react-router-dom';
+import { useNavigate, Navigate, } from 'react-router-dom';
 import { useAuth } from '@/context/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
 import { confirmAuth, fetchLendingStatsDetails } from '@/modules/lending/apis/lending-auth';
@@ -12,7 +12,7 @@ type DataLoaderProps = {
   path: string;
 };
 
-const DataLoader = ({ children, path }: DataLoaderProps) => {
+export function DataLoader({ children, path }: DataLoaderProps) {
   const { isAuthenticated, refreshToken } = useAuth();
   const setLendingStatsData = useSetLendingStatsData();
   const navigate = useNavigate();
@@ -29,13 +29,12 @@ const DataLoader = ({ children, path }: DataLoaderProps) => {
     let response;
     try {
       response = await fetchLendingStatsDetails(refreshToken);
-      setLendingStatsData(response as unknown as LendingStatsData);
+      setLendingStatsData(response);
     } catch (error) {
       console.error('Error fetching lending stats:', error);
       toast.error('Failed to fetch lending stats');
     }
-
-    setLendingStatsData(response as unknown as LendingStatsData);
+    setLendingStatsData(response);
   };
 
   // 2. Route-specific data fetch (example: borrowers/products/loans)
@@ -86,7 +85,5 @@ const DataLoader = ({ children, path }: DataLoaderProps) => {
   }
 
   // Optionally, pass loaded data down via React.cloneElement or context
-  return <>{children}</>;
+  return children;
 };
-
-export default DataLoader;
