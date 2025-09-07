@@ -93,7 +93,6 @@ export function DataLoader({ children, path }: DataLoaderProps) {
     return <Navigate to="/login" replace />;
   }
 
-  console.log('[DataLoader] Rendering children.');
   // Optionally, pass loaded data down via React.cloneElement or context
   return <>{children}</>;
 };

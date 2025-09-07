@@ -41,8 +41,8 @@ function App() {
                   },
                   loading: {
                     iconTheme: {
-                      primary: "rgb(59, 130, 246)",
-                      secondary: "white",
+                      primary: "#3b82f6",
+                      secondary: "#3b82f6",
                     },
                   },
                 }}

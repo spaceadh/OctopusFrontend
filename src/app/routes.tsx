@@ -11,6 +11,8 @@ import lendingRoutes from '@/modules/lending/routes';
 import adminRoutes from '@/modules/admin/routes';
 import ForgotPasswordPage from '@/modules/auth/pages/ForgotPassword';
 import OTPPage from '@/modules/auth/pages/OTPPage';
+import { NotFoundPage } from '@/pages/NotFoundPage';
+import { ErrorPage } from '@/pages/ErrorPage';
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +34,7 @@ export const router = createBrowserRouter([
   // Protected routes
   {
     path: '/',
+    errorElement: <ErrorPage />,
     children: [
       {
         path: 'check-in',
@@ -62,5 +65,9 @@ export const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);

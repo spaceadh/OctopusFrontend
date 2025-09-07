@@ -59,8 +59,6 @@ const CheckInPage = () => {
     if (product.redirect) {
       toast.loading(`Loading ${(product.name).toUpperCase()} product...`, { duration: 1000 });
       setTheme(themeMap[product.id] || ('system' as Theme));
-      console.log('theme set to', themeMap[product.id] || ('system' as Theme));
-      console.log('navigating to', product.redirect);
       navigate(product.redirect);
     }
   };
