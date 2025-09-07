@@ -26,15 +26,13 @@ export function DataLoader({ children, path }: DataLoaderProps) {
 
   const handlingLendingStatsData = async (refreshToken: string) => {
     if (!refreshToken) return;
-    let response;
     try {
-      response = await fetchLendingStatsDetails(refreshToken);
-      setLendingStatsData(response);
+      const response = await fetchLendingStatsDetails(refreshToken);
+      setLendingStatsData(response as LendingStatsData);
     } catch (error) {
       console.error('Error fetching lending stats:', error);
       toast.error('Failed to fetch lending stats');
     }
-    setLendingStatsData(response);
   };
 
   // 2. Route-specific data fetch (example: borrowers/products/loans)

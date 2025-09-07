@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '@/modules/auth/apis/products';
 import toast from 'react-hot-toast';
-import { useTheme } from '@/context/theme-provider';
+import { useTheme, ModuleTheme, Theme } from '@/context/theme-provider';
 
 type Product = {
   id: string;
@@ -47,17 +47,18 @@ const CheckInPage = () => {
     // Here you would typically call a mutation to update the subscription status
   };
 
-  const themeMap: { [key: string]: string } = {
-    auth: 'module-auth',
-    lending: 'module-lending',
-    properties: 'module-properties',
-    sacco: 'module-sacco',
-    chama: 'module-chama',
+  const themeMap: { [key: string]: Theme } = {
+    // auth: 'module-auth' as Theme,
+    lending: 'module-lending' as Theme,
+    properties: 'module-properties' as Theme,
+    sacco: 'module-sacco' as Theme,
+    chama: 'module-chama' as Theme,
   };
 
   const handleProductSwitch = (product: Product) => {
     if (product.redirect) {
       toast.loading(`Loading ${(product.name).toUpperCase()} product...`, { duration: 1000 });
+      setTheme(themeMap[product.id] || ('system' as Theme));
       navigate(product.redirect);
     }
   };

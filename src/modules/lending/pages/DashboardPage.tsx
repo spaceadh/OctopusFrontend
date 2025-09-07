@@ -6,14 +6,24 @@ import { useLendingBoundStore } from '@/modules/lending/context/lending-store';
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { RecentSales } from '@/modules/lending/pages/dashboard/components/recent-sales';
 import { Overview } from '@/modules/lending/pages/dashboard/components/overview';
+import { t } from 'i18next';
 
-export function Dashboard() {
-  const { user } = useAuthStore();
-  const { lendingStatsData, isLoading, error } = useLendingBoundStore();
-  const navigate = useNavigate();
+export async function Dashboard() {
+  const { user , refreshToken} = useAuthStore();
+  const { lendingStatsData, error, fetchLendingStats } = useLendingBoundStore();
+  const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
 
-  if (isLoading) {
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
+  // use effect to redirect if no user
+  if (user) {
+    await fetchLendingStats(refreshToken || '');
+    setLoading(true);
+  }
+
+  if (!lendingStatsData || loading) {
     return (
       <div className="min-h-screen bg-[rgb(212,175,55)]/20 p-4 sm:p-6 md:p-8">
         <div className="space-y-4">
@@ -93,7 +103,7 @@ export function Dashboard() {
         <div className="tabs tabs-boxed bg-base-200 rounded-xl p-1">
           <button
             className={`tab tab-lifted ${activeTab === 'overview' ? 'tab-active bg-[rgb(212,175,55)] text-white' : 'text-base-content'}`}
-            onClick={() => setActiveTab('overview')}
+            onClick={() => handleTabChange('overview')}
           >
             Overview
           </button>

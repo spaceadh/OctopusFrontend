@@ -135,7 +135,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setIsLoading(false);
       }
     };
-    verifyAuth();
   }, [setUser, setIsLoading, setRefreshToken, refreshToken]);
 
   const login = async (email: string, password: string) => {

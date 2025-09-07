@@ -23,6 +23,7 @@ interface LendingStoreState {
 }
 
 interface LendingStoreActions {
+  fetchLendingStats: (refreshToken: string) => Promise<void>;
   setLendingStatsData: (data: LendingStatsData) => void;
   reset: () => void;
   clearStorage: () => void;
@@ -57,6 +58,10 @@ export const useLendingBoundStore = create<LendingStoreState & LendingStoreActio
   persist(
     (set) => ({
       ...initialState,
+      fetchLendingStats: async (refreshToken: string) => {
+        if (!refreshToken) return;
+        set({ isLoading: true, error: null });
+      },
       setLendingStatsData: (data) => {
         set({
           lendingStatsData: data,
@@ -87,3 +92,4 @@ export const useLendingStore = () => useLendingBoundStore((s) => s.lendingStatsD
 export const useSetLendingStatsData = () => useLendingBoundStore((s) => s.setLendingStatsData);
 export const useClientsLoading = () => useLendingBoundStore(state => state.isLoading);
 export const useClearClientsStorage = () => useLendingBoundStore(state => state.clearStorage);
+export const useFetchLendingStats = () => useLendingBoundStore((s) => s.fetchLendingStats);

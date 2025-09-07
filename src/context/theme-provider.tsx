@@ -2,10 +2,10 @@ import { createContext, useContext, useEffect, useState, useMemo } from 'react'
 import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
 
 // Define all possible themes including modules
-type SystemTheme = 'dark' | 'light' | 'system'
-type ModuleTheme = 'module-auth' | 'module-lending' | 'module-property' | 'module-sacco' | 'module-chama'
-type Theme = SystemTheme | ModuleTheme
-type ResolvedTheme = Exclude<SystemTheme, 'system'> | ModuleTheme
+export type SystemTheme = 'dark' | 'light' | 'system'
+export type ModuleTheme = 'module-auth' | 'module-lending' | 'module-property' | 'module-sacco' | 'module-chama'
+export type Theme = SystemTheme | ModuleTheme
+export type ResolvedTheme = Exclude<SystemTheme, 'system'> | ModuleTheme
 
 const DEFAULT_THEME: Theme = 'system'
 const THEME_COOKIE_NAME = 'vite-ui-theme'
