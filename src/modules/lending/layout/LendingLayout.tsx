@@ -88,7 +88,7 @@ export function LendingLayout() {
             <aside
               className={cn(
                 "fixed lg:relative z-50 flex flex-col bg-base-200 border-r border-base-300 transition-all duration-300 ease-in-out h-screen justify-between overflow-hidden",
-                isSidebarOpen ? "translate-x-0 w-64" : "-translate-x-full lg:translate-x-0 lg:w-64",
+                isSidebarOpen ? "translate-x-0 w-56" : "-translate-x-full lg:translate-x-0 lg:w-56",
                 isMobile ? "inset-y-0 left-0" : "h-full"
               )}
             >
@@ -179,7 +179,7 @@ export function LendingLayout() {
             {/* Main Content */}
             <div className={cn(
               "flex-1 flex flex-col overflow-hidden transition-all duration-300",
-              isSidebarOpen && !isMobile ? "lg:ml-64" : "lg:ml-0"
+              isSidebarOpen && !isMobile ? "lg:ml-56" : "lg:ml-0"
             )}>
               <header className="bg-base-200 border-b border-base-300 p-4 flex items-center justify-between sticky top-0 z-40">
                 <div className="flex items-center">

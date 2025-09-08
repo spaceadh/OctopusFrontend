@@ -2,8 +2,11 @@ import React from 'react';
 import { useNavigate, Navigate, } from 'react-router-dom';
 import { useAuth } from '@/context/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
-import { confirmAuth, fetchLendingStatsDetails } from '@/modules/lending/apis/lending-auth';
-import { getProducts } from '@/modules/lending/apis/products';
+import {
+  mockConfirmAuth,
+  mockFetchLendingStatsDetails,
+  mockGetProducts,
+} from '@/modules/lending/apis/mock-data';
 import { useQuery } from '@tanstack/react-query';
 import {  LendingStatsData, useSetLendingStatsData } from '@/modules/lending/context/lending-store';
 import { toast } from 'react-hot-toast';
@@ -18,22 +21,10 @@ export function DataLoader({ children, path }: DataLoaderProps) {
   const setLendingStatsData = useSetLendingStatsData();
   const navigate = useNavigate();
 
-  const logconfirmAuth = async (token: string) => {
-    try {
-      console.log('[DataLoader] Confirming authentication...');
-      const result = await confirmAuth(token);
-      console.log('[DataLoader] Auth confirmation result:', result);
-      return result;
-    } catch (error) {
-      console.error('[DataLoader] Error confirming auth:', error);
-      throw error;
-    }
-  };
-
   // 1. Auth check
   const { data: authResult, isLoading: isLoadingAuth } = useQuery({
     queryKey: ['auth-check', refreshToken],
-    queryFn: () => logconfirmAuth(refreshToken || ''),
+    queryFn: () => mockConfirmAuth(refreshToken || ''),
     retry: false,
   });
 
@@ -41,7 +32,7 @@ export function DataLoader({ children, path }: DataLoaderProps) {
     if (!refreshToken) return;
     try {
       console.log('[DataLoader] Fetching lending stats data...');
-      const response = await fetchLendingStatsDetails(refreshToken);
+      const response = await mockFetchLendingStatsDetails(refreshToken);
       console.log('[DataLoader] Fetched lending stats:', response);
       setLendingStatsData(response as LendingStatsData);
       return response;
@@ -66,7 +57,7 @@ export function DataLoader({ children, path }: DataLoaderProps) {
       }
       if (path === '/borrowers') {
         console.log('[DataLoader] Fetching borrowers...');
-        return getProducts();
+        return mockGetProducts();
       }
       console.log(`[DataLoader] No data fetch configured for path: ${path}`);
       return Promise.resolve(null);
