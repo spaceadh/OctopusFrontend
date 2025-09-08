@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuthStore } from '@/context/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -7,10 +8,20 @@ interface ModuleGuardProps {
 }
 
 export function ModuleGuard({ moduleName }: ModuleGuardProps) {
-  const { user, isLoading } = useAuthStore();
+  const { user } = useAuthStore();
   const location = useLocation();
 
-  if (isLoading) {
+  const [loading, setLoading] = useState(true);
+  // load animation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 800); // Simulate a loading time of 800ms
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
     return (
       <div className="min-h-screen bg-[rgb(212,175,55)]/20 flex items-center justify-center p-4">
         <div className="card bg-base-200 rounded-2xl shadow-sm border border-base-300 w-full max-w-2xl p-6 space-y-4">

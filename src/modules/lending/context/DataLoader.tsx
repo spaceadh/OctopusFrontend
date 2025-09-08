@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Navigate, } from 'react-router-dom';
 import { useAuth } from '@/context/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -69,12 +69,12 @@ export function DataLoader({ children, path }: DataLoaderProps) {
   console.log(`[DataLoader] Auth result for enabled flag: !!authResult=${!!authResult}`);
   console.log(`[DataLoader] Data: authResult=`, authResult, `resourceData=`, resourceData);
 
-  // React.useEffect(() => {
-  //   if (authResult === false) {
-  //     console.log('[DataLoader] Authentication failed, navigating to login.');
-  //     navigate('/login', { replace: true });
-  //   }
-  // }, [authResult, navigate]);
+  useEffect(() => {
+    if (authResult === false) {
+      console.log('[DataLoader] Authentication failed, navigating to login.');
+      navigate('/login', { replace: true });
+    }
+  }, [authResult, navigate]);
 
   if (isLoadingAuth || isLoadingData) {
     console.log('[DataLoader] Rendering loading skeleton...');

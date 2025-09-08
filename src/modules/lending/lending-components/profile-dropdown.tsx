@@ -41,19 +41,19 @@ export function ProfileDropdown() {
           <li>
             <Link to="/settings" className="text-base-content hover:bg-base-200">
               Profile
-              <span className="ml-auto text-xs text-base-content/50">⇧⌘P</span>
+              {/* <span className="ml-auto text-xs text-base-content/50">⇧⌘P</span> */}
             </Link>
           </li>
           <li>
             <Link to="/settings" className="text-base-content hover:bg-base-200">
               Billing
-              <span className="ml-auto text-xs text-base-content/50">⌘B</span>
+              {/* <span className="ml-auto text-xs text-base-content/50">⌘B</span> */}
             </Link>
           </li>
           <li>
             <Link to="/settings" className="text-base-content hover:bg-base-200">
               Settings
-              <span className="ml-auto text-xs text-base-content/50">⌘S</span>
+              {/* <span className="ml-auto text-xs text-base-content/50">⌘S</span> */}
             </Link>
           </li>
           <li>
@@ -65,7 +65,7 @@ export function ProfileDropdown() {
               className="text-base-content hover:bg-base-200"
             >
               Sign out
-              <span className="ml-auto text-xs text-base-content/50">⇧⌘Q</span>
+              {/* <span className="ml-auto text-xs text-base-content/50">⇧⌘Q</span> */}
             </button>
           </li>
         </ul>

@@ -10,6 +10,17 @@ export const mockLendingStatsData: LendingStatsData = {
   repaymentRate: 50,
   defaultRate: 5,
   activeLoans: 50,
+  country: 'Kenya',
+  _id: '1',
+  LendingRole: 'Admin',
+  LendingOrgEmail: 'admin@octopus.com',
+  LendingOrgWebsite: 'https://www.octopus.com',
+  LendingOrgAddress: '123 Octopus St, Nairobi, Kenya',
+  LendingOrgCallSupportEmail: 'support@octopus.com',
+  LendingOrgCallSupportPhone: '+254 700 000 000',
+  status: true,
+  isSubscribed: true,
+  createdAt: new Date(),
   inactiveLoans: 50,
 };
 

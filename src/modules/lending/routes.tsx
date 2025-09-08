@@ -5,6 +5,7 @@ import BorrowersListPage from '@/modules/lending/pages/BorrowersListPage';
 import { DataLoader } from '@/modules/lending/context/DataLoader';
 import { LendingLayout } from '@/modules/lending/layout/LendingLayout';
 
+
 export const lendingRoutes: RouteObject[] = [
   {
     path: 'lending',
