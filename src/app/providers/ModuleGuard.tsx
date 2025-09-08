@@ -1,15 +1,30 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuthStore } from '@/context/authStore';
 import { Skeleton } from '@/components/ui/skeleton';
+import React from 'react';
 
 interface ModuleGuardProps {
   moduleName: string;
 }
 
 export function ModuleGuard({ moduleName }: ModuleGuardProps) {
-  const { user, isLoading } = useAuthStore();
+  const { user } = useAuthStore();
   const location = useLocation();
+  const [loading, setLoading] = React.useState(false);
+  const [loadingTimeout, setLoadingTimeout] = React.useState<NodeJS.Timeout | null>(null);
 
+  // Set a timeout to show the loading skeleton if auth check takes too long
+  React.useEffect(() => {
+    setLoadingTimeout(setTimeout(() => setLoading(true), 300));
+
+    return () => {
+      if (loadingTimeout) {
+        clearTimeout(loadingTimeout);
+      }
+    };
+  }, [loadingTimeout]);
+  
+  const isLoading = loading && !user;
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[rgb(212,175,55)]/20 flex items-center justify-center p-4">
